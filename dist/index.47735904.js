@@ -24915,7 +24915,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_navbarDefault.default.Brand, {
-            href: "http://localhost:1234",
+            href: "https://myflixcl.netlify.app/",
             className: "navbar-brand",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
