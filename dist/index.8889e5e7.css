@@ -1,0 +1,58 @@
+.movieCard {
+  margin-bottom: 2em;
+}
+.movie-view {
+  background-size: cover;
+  background-attachment: fixed;
+  text-align: center;
+  color: #ffffff;
+}
+
+.label {
+  font-weight: 800;
+}
+
+.linkButton {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.rowGap {
+  margin-bottom: 2em;
+}
+
+.buttonBottom {
+  margin-right: 1em;
+  margin-left: 1em;
+}
+Form {
+  color: #ffffff;
+}
+Form {
+  color: #ffffff;
+}
+.genre-view {
+  text-align: center;
+  color: #ffffff;
+}
+
+.genreImage {
+  height: 300px;
+}
+.director-view {
+  text-align: center;
+  color: #ffffff;
+}
+
+.directorImage {
+  height: 300px;
+}
+.favoriteMovies {
+  color: #ffffff;
+}
+
+body {
+  background-size: cover;
+  background-attachment: fixed;
+}
+/*# sourceMappingURL=index.8889e5e7.css.map */
