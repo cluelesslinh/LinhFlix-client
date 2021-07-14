@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, FormControl } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import axios from "axios";
-import Container from "react-bootstrap/Container";
-import { Button, Form, Col, Row } from "react-bootstrap";
+import { Container, Card, FormControl, Button, Form, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import './profile-view.scss';
 
 export class ProfileView extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       Username: "",
       Password: "",
@@ -23,6 +22,7 @@ export class ProfileView extends React.Component {
       BirthdateError: "",
     };
   }
+
   componentDidMount() {
     let accessToken = localStorage.getItem("token");
     this.getUser(accessToken);
@@ -35,9 +35,9 @@ export class ProfileView extends React.Component {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(response => {
-        let formattedBirthdate = 'N/A';
+        let formattedBirthdate = 'yyyy-MM-dd';
         if (typeof response.data.Birthdate != "undefined" && response.data.Birthdate != null) {
-          formattedBirthdate = moment(response.data.Birthdate).format("YYYY-MM-DD")
+          formattedBirthdate = moment(response.data.Birthdate).format("yyyy-MM-dd")
         };
         console.log({ formattedBirthdate });
         this.setState({
@@ -88,7 +88,7 @@ export class ProfileView extends React.Component {
         console.log(error);
       });
   }
-  handleUpdate(e) {
+  handleUpdate(_e) {
     let token = localStorage.getItem("token");
     let user = localStorage.getItem("user");
     console.log(this.state);
@@ -158,7 +158,7 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { movies, user } = this.props;
+    const { movies } = this.props;
     const { UsernameError, EmailError, PasswordError, BirthdateError } = this.state;
     const FavoriteMovieList = movies.filter((movie) => {
       return this.state.FavoriteMovies.includes(movie._id);
@@ -191,7 +191,7 @@ export class ProfileView extends React.Component {
                 <Form.Group controlId="formPassword">
                   <Form.Label>Password: </Form.Label>
                   <FormControl size="sm"
-                    type="password"
+                    type="current-password"
                     name="Password"
                     value={this.state.Password}
                     onChange={(e) => this.handleChange(e)}
@@ -284,20 +284,20 @@ export class ProfileView extends React.Component {
                 <Row className='mb-20'>
                   {FavoriteMovieList.map((movie) => {
                     return (
-                      <Col md={3} key={movie._id}>
-                        <div key={movie._id}>
-                          <Card className='mb-20'>
-                            <Card.Img variant="top" src={movie.ImagePath} />
-                            <Card.Body>
-                              <Link to={`/movies/${movie._id}`}>
-                                <Card.Title as='h6'>{movie.Title}</Card.Title>
-                              </Link>
-                            </Card.Body>
-                          </Card>
-                          <Button className='mb-30' onClick={() => this.removeFavorite(movie)}>
-                            Remove
-                      </Button>
-                        </div>
+                      <Col md={3}>
+                        <Card className="movieCard">
+                          <Link to={`/movies/${movie._id}`}>
+                          <Card.Img variant="top" src={movie.ImagePath}/>
+                          </Link>
+                          <Card.Body>
+                            <Link to={`/movies/${movie._id}`}>
+                              <Button variant="link">Open</Button>
+                            </Link>
+                            <Button className='removeButton mb-30' onClick={() => this.removeFavorite(movie)}>
+                              Remove
+                            </Button>
+                          </Card.Body>
+                        </Card>
                       </Col>
                     );
                   })}
@@ -321,3 +321,5 @@ let mapStateToProps = state => {
     favoriteMovies: state.favoriteMovies,
   }
 }
+
+export default connect(mapStateToProps, {} )(ProfileView);

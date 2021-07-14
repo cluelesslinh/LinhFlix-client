@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import './login-view.scss';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import './login-view.scss';
 
@@ -24,7 +21,7 @@ export function LoginView(props) {
     console.log(data);
     props.onLoggedIn(data);
   })
-  .catch(e => {
+  .catch(_e => {
     console.log('no such user')
   });
 };
@@ -33,7 +30,7 @@ export function LoginView(props) {
     <Form>
       <Row className="justify-content-md-center">
         <Col md={8}>
-          <h1 class="title"><center>MYFLIX LOGIN</center></h1>
+          <h1 className="title"><center>MYFLIX LOGIN</center></h1>
         </Col>
         <Col md={8}>
       <Form.Group controlId="formUsername">

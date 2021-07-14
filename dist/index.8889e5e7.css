@@ -51,6 +51,10 @@ Form {
   color: #ffffff;
 }
 
+.movieCard {
+  margin-top: 1em;
+}
+
 body {
   background-size: cover;
   background-attachment: fixed;
