@@ -47,7 +47,13 @@ Form {
 .directorImage {
   height: 300px;
 }
+.favoriteMovies {
+  color: #ffffff;
+}
 
+.movieCard {
+  margin-top: 1em;
+}
 
 body {
   background-size: cover;

@@ -24824,8 +24824,6 @@ class MainView extends _reactDefault.default.Component {
             });
             this.getUser(accessToken, userToken);
             this.getMovies(accessToken);
-            this.getGenres(accessToken);
-            this.getDirectors(accessToken);
         }
     }
     getUser(token, Username) {
@@ -24892,14 +24890,14 @@ class MainView extends _reactDefault.default.Component {
         return(/*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 108
+                lineNumber: 106
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement("div", {
             className: "main-view justify-content-md-center",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 109
+                lineNumber: 107
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar, {
@@ -24911,7 +24909,7 @@ class MainView extends _reactDefault.default.Component {
             className: "navbar mb-5 bg-dk",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 110
+                lineNumber: 108
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Brand, {
@@ -24919,14 +24917,14 @@ class MainView extends _reactDefault.default.Component {
             className: "navbar-brand",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 118
+                lineNumber: 116
             },
             __self: this
         }, "myFlix"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Toggle, {
             "aria-controls": "basic-navbar-nav",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 121
+                lineNumber: 119
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Navbar.Collapse, {
@@ -24934,20 +24932,20 @@ class MainView extends _reactDefault.default.Component {
             id: "basic-navbar-nav",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 122
+                lineNumber: 120
             },
             __self: this
         }, !user ? /*#__PURE__*/ _reactDefault.default.createElement("ul", {
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 127
+                lineNumber: 125
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
             to: `/`,
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 128
+                lineNumber: 126
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -24955,14 +24953,14 @@ class MainView extends _reactDefault.default.Component {
             className: "navbar-link text-light",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 129
+                lineNumber: 127
             },
             __self: this
         }, "Login")), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
             to: `/register`,
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 133
+                lineNumber: 131
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -24970,20 +24968,20 @@ class MainView extends _reactDefault.default.Component {
             className: "navbar-link text-light",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 134
+                lineNumber: 132
             },
             __self: this
         }, "Register"))) : /*#__PURE__*/ _reactDefault.default.createElement("ul", {
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 140
+                lineNumber: 138
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
             to: `/users/${user}`,
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 141
+                lineNumber: 139
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -24991,14 +24989,14 @@ class MainView extends _reactDefault.default.Component {
             className: "navbar-link text-light",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 142
+                lineNumber: 140
             },
             __self: this
         }, "Profile")), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
             to: `/`,
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 146
+                lineNumber: 144
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -25008,14 +25006,14 @@ class MainView extends _reactDefault.default.Component {
             ,
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 147
+                lineNumber: 145
             },
             __self: this
         }, "Logout"))))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
             className: "justify-content-md-center",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 161
+                lineNumber: 159
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -25034,7 +25032,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 163
+                lineNumber: 161
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -25047,7 +25045,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 170
+                lineNumber: 168
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -25068,7 +25066,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 177
+                lineNumber: 175
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -25090,7 +25088,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 188
+                lineNumber: 186
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -25112,7 +25110,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 198
+                lineNumber: 196
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -25134,7 +25132,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 209
+                lineNumber: 207
             },
             __self: this
         })))));
@@ -41497,7 +41495,7 @@ function LoginView(props) {
         },
         __self: this
     }, "Password:"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
-        type: "password",
+        type: "current-password",
         onChange: (e)=>setPassword(e.target.value)
         ,
         __source: {
@@ -42203,13 +42201,9 @@ var _reactRouterDom = require("react-router-dom");
 var _actions = require("../../actions/actions");
 var _profileViewScss = require("./profile-view.scss");
 class ProfileView extends _reactDefault.default.Component {
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state = {
-            Username: "",
-            Password: "",
-            Email: "",
-            Birthdate: "",
             FavoriteMovies: [],
             UsernameError: "",
             EmailError: "",
@@ -42219,26 +42213,29 @@ class ProfileView extends _reactDefault.default.Component {
     }
     componentDidMount() {
         let accessToken = localStorage.getItem("token");
-        this.getUsers(accessToken);
+        this.getUser(accessToken);
     }
-    getUsers(token) {
-        _axiosDefault.default.get('https://myflixcl.herokuapp.com/users', {
+    getUser(token) {
+        const url = "https://myflixcl.herokuapp.com/users/" + localStorage.getItem("user");
+        _axiosDefault.default.get(url, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
-            // Assign the result to the state
             this.setState({
-                users: response.data
+                Username: response.data.Username,
+                Password: response.data.Password,
+                Email: response.data.Email,
+                Birthdate: response.data.Birthdate,
+                FavoriteMovies: response.data.FavoriteMovies
             });
-            console.log(response);
         }).catch(function(error) {
             console.log(error);
         });
     }
     removeFavorite(movie) {
         const token = localStorage.getItem("token");
-        const url = "https://myflixcl.herokuapp.com/users" + localStorage.getItem("user") + "/movies/" + movie._id;
+        const url = "https://myflixcl.herokuapp.com/users/" + localStorage.getItem("user") + "/movies/" + movie._id;
         _axiosDefault.default.delete(url, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -42246,8 +42243,7 @@ class ProfileView extends _reactDefault.default.Component {
         }).then((response)=>{
             console.log(response);
             this.componentDidMount();
-            // location.reload();
-            alert(movie.Title + " has been removed from your Favorites.");
+            alert(movie.Title + " removed from your Favorites.");
         });
     }
     handleDelete() {
@@ -42327,13 +42323,12 @@ class ProfileView extends _reactDefault.default.Component {
     }
     handleChange(e) {
         let { name , value  } = e.target;
-        // console.log(name, value);
         this.setState({
             [name]: value
         });
     }
     render() {
-        const { movies  } = this.props;
+        const { movies , user  } = this.props;
         const { UsernameError , EmailError , PasswordError , BirthdateError  } = this.state;
         const FavoriteMovieList = movies.filter((movie)=>{
             return this.state.FavoriteMovies.includes(movie._id);
@@ -42345,134 +42340,34 @@ class ProfileView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 158
+                lineNumber: 159
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Container, {
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 159
+                lineNumber: 160
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
             className: "justify-content-md-center",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 160
+                lineNumber: 161
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
             md: 12,
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 161
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Jumbotron, {
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
                 lineNumber: 162
             },
             __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement("div", {
-            className: "favoriteMovies",
-            style: {
-                float: "center",
-                textAlign: "center"
-            },
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
+            className: "justify-content-md-center mb-30",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
                 lineNumber: 163
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
-            className: "mt-200",
-            as: "h3",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 164
-            },
-            __self: this
-        }, "Favorite Movies:"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
-            className: "mb-20",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 165
-            },
-            __self: this
-        }, FavoriteMovieList.map((movie)=>{
-            return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
-                md: 3,
-                key: movie._id,
-                __source: {
-                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 168
-                },
-                __self: this
-            }, /*#__PURE__*/ _reactDefault.default.createElement("div", {
-                key: movie._id,
-                __source: {
-                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 169
-                },
-                __self: this
-            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card, {
-                className: "mb-20",
-                __source: {
-                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 170
-                },
-                __self: this
-            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Img, {
-                variant: "top",
-                src: movie.ImagePath,
-                __source: {
-                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 171
-                },
-                __self: this
-            }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Body, {
-                __source: {
-                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 172
-                },
-                __self: this
-            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
-                to: `/movies/${movie._id}`,
-                __source: {
-                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 173
-                },
-                __self: this
-            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Title, {
-                as: "h6",
-                __source: {
-                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 174
-                },
-                __self: this
-            }, movie.Title)), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
-                className: "mb-30",
-                onClick: ()=>this.removeFavorite(movie)
-                ,
-                __source: {
-                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 176
-                },
-                __self: this
-            }, "Remove"))))));
-        })))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Jumbotron, {
-            className: "profile-view",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 187
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
-            className: "justify-content-md-center",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 188
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement("h1", {
@@ -42481,20 +42376,20 @@ class ProfileView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 189
+                lineNumber: 164
             },
             __self: this
-        }, "Update Profile Details"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
+        }, "My Account"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
             controlId: "formUsername",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 190
+                lineNumber: 166
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 191
+                lineNumber: 167
             },
             __self: this
         }, "Username: "), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.FormControl, {
@@ -42507,7 +42402,7 @@ class ProfileView extends _reactDefault.default.Component {
             placeholder: "Change username",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 192
+                lineNumber: 168
             },
             __self: this
         }), Object.keys(UsernameError).map((key)=>{
@@ -42518,7 +42413,7 @@ class ProfileView extends _reactDefault.default.Component {
                 },
                 __source: {
                     fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 200
+                    lineNumber: 176
                 },
                 __self: this
             }, UsernameError[key]));
@@ -42526,13 +42421,13 @@ class ProfileView extends _reactDefault.default.Component {
             controlId: "formPassword",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 206
+                lineNumber: 183
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 207
+                lineNumber: 184
             },
             __self: this
         }, "Password: "), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.FormControl, {
@@ -42542,10 +42437,10 @@ class ProfileView extends _reactDefault.default.Component {
             value: this.state.Password,
             onChange: (e)=>this.handleChange(e)
             ,
-            placeholder: "Enter current password or Change password",
+            placeholder: "Enter password or New password",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 208
+                lineNumber: 185
             },
             __self: this
         }), Object.keys(PasswordError).map((key)=>{
@@ -42556,7 +42451,7 @@ class ProfileView extends _reactDefault.default.Component {
                 },
                 __source: {
                     fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 216
+                    lineNumber: 193
                 },
                 __self: this
             }, PasswordError[key]));
@@ -42564,13 +42459,13 @@ class ProfileView extends _reactDefault.default.Component {
             controlId: "formEmail",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 222
+                lineNumber: 200
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 223
+                lineNumber: 201
             },
             __self: this
         }, "Email: "), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.FormControl, {
@@ -42583,7 +42478,7 @@ class ProfileView extends _reactDefault.default.Component {
             placeholder: "Change Email",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 224
+                lineNumber: 202
             },
             __self: this
         }), Object.keys(EmailError).map((key)=>{
@@ -42594,7 +42489,7 @@ class ProfileView extends _reactDefault.default.Component {
                 },
                 __source: {
                     fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 233
+                    lineNumber: 211
                 },
                 __self: this
             }, EmailError[key]));
@@ -42602,13 +42497,13 @@ class ProfileView extends _reactDefault.default.Component {
             controlId: "formBirthdate",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 239
+                lineNumber: 218
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 240
+                lineNumber: 219
             },
             __self: this
         }, "Date of Birth: "), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.FormControl, {
@@ -42621,7 +42516,7 @@ class ProfileView extends _reactDefault.default.Component {
             placeholder: "Change Birthdate",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 241
+                lineNumber: 220
             },
             __self: this
         }), Object.keys(BirthdateError).map((key)=>{
@@ -42632,7 +42527,7 @@ class ProfileView extends _reactDefault.default.Component {
                 },
                 __source: {
                     fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                    lineNumber: 250
+                    lineNumber: 229
                 },
                 __self: this
             }, BirthdateError[key]));
@@ -42640,12 +42535,12 @@ class ProfileView extends _reactDefault.default.Component {
             to: `/users/${this.state.Username}`,
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 257
+                lineNumber: 237
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
             className: "mb-2",
-            variant: "success",
+            variant: "dark",
             type: "link",
             size: "md",
             block: true,
@@ -42653,52 +42548,133 @@ class ProfileView extends _reactDefault.default.Component {
             ,
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 258
+                lineNumber: 238
             },
             __self: this
-        }, "Save changes")))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Jumbotron, {
+        }, "Save changes")), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
+            to: `/`,
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 269
+                lineNumber: 248
             },
             __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement("h1", {
-            style: {
-                textAlign: "center"
-            },
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+            className: "mb-2",
+            variant: "primary",
+            type: "submit",
+            size: "md",
+            block: true,
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 270
+                lineNumber: 249
             },
             __self: this
-        }, "Delete Account"), /*#__PURE__*/ _reactDefault.default.createElement("h3", {
-            style: {
-                textAlign: "center"
-            },
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 271
-            },
-            __self: this
-        }, "There is no undoing this action."), /*#__PURE__*/ _reactDefault.default.createElement("br", {
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 272
-            },
-            __self: this
-        }), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+        }, "Back to Main")), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
             className: "mb-2",
             variant: "danger",
-            size: "lg",
+            size: "md",
             block: true,
             onClick: ()=>this.handleDelete()
             ,
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
-                lineNumber: 273
+                lineNumber: 259
             },
             __self: this
-        }, " Delete Account")))))));
+        }, "Delete Account")), /*#__PURE__*/ _reactDefault.default.createElement("div", {
+            className: "favoriteMovies",
+            style: {
+                float: "center",
+                textAlign: "center"
+            },
+            __source: {
+                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 268
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Text, {
+            className: "mt-200",
+            as: "h3",
+            __source: {
+                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 275
+            },
+            __self: this
+        }, "Favorite Movies:"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
+            className: "mb-20",
+            __source: {
+                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
+                lineNumber: 276
+            },
+            __self: this
+        }, FavoriteMovieList.map((movie)=>{
+            return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+                md: 3,
+                key: movie._id,
+                __source: {
+                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 279
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement("div", {
+                key: movie._id,
+                __source: {
+                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 280
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card, {
+                className: "movieCard",
+                __source: {
+                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 281
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
+                to: `/movies/${movie._id}`,
+                __source: {
+                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 282
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Img, {
+                variant: "top",
+                src: movie.ImagePath,
+                __source: {
+                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 283
+                },
+                __self: this
+            })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Card.Body, {
+                __source: {
+                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 285
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
+                to: `/movies/${movie._id}`,
+                __source: {
+                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 286
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+                variant: "link",
+                __source: {
+                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 287
+                },
+                __self: this
+            }, "Open")), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
+                onClick: ()=>this.removeFavorite(movie)
+                ,
+                __source: {
+                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/profile-view/profile-view.jsx",
+                    lineNumber: 289
+                },
+                __self: this
+            }, "Remove"))))));
+        }))))))));
     }
 }
 ProfileView.propTypes = {
@@ -42706,8 +42682,8 @@ ProfileView.propTypes = {
 };
 let mapStateToProps = (state)=>{
     return {
-        user: state.user,
         movies: state.movies,
+        user: state.user,
         favoriteMovies: state.favoriteMovies
     };
 };

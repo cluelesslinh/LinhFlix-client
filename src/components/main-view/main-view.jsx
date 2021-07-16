@@ -31,8 +31,6 @@ class MainView extends React.Component {
         });
         this.getUser(accessToken, userToken);
         this.getMovies(accessToken);
-        this.getGenres(accessToken);
-        this.getDirectors(accessToken);
        }
       }
 
