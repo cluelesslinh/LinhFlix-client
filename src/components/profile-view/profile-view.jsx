@@ -12,37 +12,11 @@ export class ProfileView extends React.Component {
   constructor() {
     super();
     this.state = {
-      FavoriteMovies: [],
       UsernameError: "",
       EmailError: "",
       PasswordError: "",
       BirthdateError: "",
     };
-  }
-
-  componentDidMount() {
-    let accessToken = localStorage.getItem("token");
-    this.getUser(accessToken);
-  }
-
-  getUser(token) {
-    const url = "https://myflixcl.herokuapp.com/users/" +
-      localStorage.getItem("user");
-    axios.get(url, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then(response => {
-        this.setState({
-          Username: response.data.Username,
-          Password: response.data.Password,
-          Email: response.data.Email,
-          Birthdate: response.data.Birthdate,
-          FavoriteMovies: response.data.FavoriteMovies
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   removeFavorite(movie) {
@@ -58,7 +32,6 @@ export class ProfileView extends React.Component {
       })
       .then((response) => {
         console.log(response);
-        this.componentDidMount();
         alert(movie.Title + " removed from your Favorites.");
       });
   }
@@ -91,10 +64,10 @@ export class ProfileView extends React.Component {
       if (setisValid) {
         axios.put(`https://myflixcl.herokuapp.com/users/${user}`,
           {
-            Username: this.state.Username,
-            Password: this.state.Password,
-            Email: this.state.Email,
-            Birthdate: this.state.Birthdate,
+            Username: user.Username,
+            Password: user.Password,
+            Email: user.Email,
+            Birthdate: user.Birthdate,
           },
           { headers: { Authorization: `Bearer ${token}` } }
         )
@@ -112,24 +85,25 @@ export class ProfileView extends React.Component {
     }
 
   formValidation() {
+    const user = localStorage.getItem("user");
     let UsernameError = {};
     let EmailError = {};
     let PasswordError = {};
     let BirthdateError = {};
     let isValid = true;
-    if (this.state.Username.trim().length < 5) {
+    if (user.Username.trim().length < 5) {
       UsernameError.usernameShort = "Must be alphanumeric and contains at least 5 characters";
       isValid = false;
     }
-    if (this.state.Password.trim().length < 3) {
+    if (user.Password.trim().length < 3) {
       PasswordError.passwordMissing = "You must enter a current or new password.(minimum 4 characters) ";
       isValid = false;
     }
-    if (!(this.state.Email && this.state.Email.includes(".") && this.state.Email.includes("@"))) {
+    if (!(user.Email && user.Email.includes(".") && user.Email.includes("@"))) {
       EmailError.emailNotEmail = "A valid email address is required.";
       isValid = false;
     }
-    if (this.state.birthdate === '') {
+    if (user.Birthdate === '') {
       BirthdateError.birthdateEmpty = "Please enter your birthdate.";
       isValid = false;
     }
@@ -153,7 +127,7 @@ export class ProfileView extends React.Component {
     const { movies, user } = this.props;
     const { UsernameError, EmailError, PasswordError, BirthdateError } = this.state;
     const FavoriteMovieList = movies.filter((movie) => {
-      return this.state.FavoriteMovies.includes(movie._id);
+      return user.FavoriteMovies.includes(movie._id);
     });
     return (
       <div className="userProfile" style={{ display: "flex" }}>
@@ -170,7 +144,7 @@ export class ProfileView extends React.Component {
                     name="Username"
                     value={this.state.Username}
                     onChange={(e) => this.handleChange(e)}
-                    placeholder="Change username" />
+                    placeholder={user.Username} />
                   {Object.keys(UsernameError).map((key) => {
                     return (
                       <div key={key} style={{ color: "red" }}>
@@ -187,7 +161,7 @@ export class ProfileView extends React.Component {
                     name="Password"
                     value={this.state.Password}
                     onChange={(e) => this.handleChange(e)}
-                    placeholder="Enter password or New password" />
+                    placeholder="Enter current or new password" />
                   {Object.keys(PasswordError).map((key) => {
                     return (
                       <div key={key} style={{ color: "red" }}>
@@ -205,7 +179,7 @@ export class ProfileView extends React.Component {
                     name="Email"
                     value={this.state.Email}
                     onChange={(e) => this.handleChange(e)}
-                    placeholder="Change Email" />
+                    placeholder={user.Email} />
                   {Object.keys(EmailError).map((key) => {
                     return (
                       <div key={key} style={{ color: "red" }}>
@@ -219,11 +193,11 @@ export class ProfileView extends React.Component {
                   <Form.Label>Date of Birth: </Form.Label>
                   <FormControl
                     size="sm"
-                    type="date"
+                    type="text"
                     name="Birthdate"
                     value={this.state.Birthdate}
                     onChange={(e) => this.handleChange(e)}
-                    placeholder="Change Birthdate" />
+                    placeholder={user.Birthdate} />
                   {Object.keys(BirthdateError).map((key) => {
                     return (
                       <div key={key} style={{ color: "red" }}>
@@ -234,7 +208,7 @@ export class ProfileView extends React.Component {
 
                 </Form.Group>
 
-                <Link to={`/users/${this.state.Username}`}>
+                <Link to={`/users/${user.Username}`}>
                   <Button className="mb-2" variant="dark"
                     type="link"
                     size="md"
@@ -309,8 +283,7 @@ ProfileView.propTypes = {
 let mapStateToProps = state => {
   return {
     movies: state.movies,
-    user: state.user,
-    favoriteMovies: state.favoriteMovies,
+    user: state.user
   }
 }
 
