@@ -9,7 +9,7 @@ import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { GenreView } from '../genre-view/genre-view';
 import { DirectorView } from '../director-view/director-view';
-import { ProfileView } from '../profile-view/profile-view';
+import  ProfileView  from '../profile-view/profile-view';
 import { Row, Col, Button, Navbar } from 'react-bootstrap';
 
 import './main-view.scss';
@@ -89,14 +89,14 @@ class MainView extends React.Component {
   onLoggedIn(authData) {
       localStorage.setItem('token', authData.token);
       localStorage.setItem('user', authData.user.Username);
-      this.setUser(authData.user.Username);
+      this.props.setUser(authData.user.Username);
       this.getMovies(authData.token);
   }
 
   onLoggedOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.setUser(null);
+    this.props.setUser(null);
   }
 
   render() {
