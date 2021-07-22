@@ -136,7 +136,7 @@ class MainView extends React.Component {
                   </ul >
                 ) : (
                   <ul>
-                    <Link to={`/users/${user}`}>
+                    <Link to={`/users/${user.Username}`}>
                       <Button variant="link" className="navbar-link text-light">
                         Profile
                     </Button>
