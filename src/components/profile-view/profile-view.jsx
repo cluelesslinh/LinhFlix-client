@@ -9,6 +9,7 @@ import { setUser, updateUser } from '../../actions/actions';
 import './profile-view.scss';
 
 export class ProfileView extends React.Component {
+
   constructor() {
     super();
     this.state = {
@@ -21,11 +22,7 @@ export class ProfileView extends React.Component {
 
   removeFavorite(movie) {
     const token = localStorage.getItem("token");
-    const url =
-      "https://myflixcl.herokuapp.com/users/" +
-      localStorage.getItem("user") +
-      "/movies/" +
-      movie._id;
+    const url = "https://myflixcl.herokuapp.com/users/" + localStorage.getItem("user") + "/movies/" + movie._id;
     axios
       .delete(url, {
         headers: { Authorization: `Bearer ${token}` },
@@ -57,10 +54,13 @@ export class ProfileView extends React.Component {
 
   handleUpdate(_e) {
       let token = localStorage.getItem("token");
-      // console.log({ token });
       let user = localStorage.getItem("user");
       console.log(this.state);
-      let setisValid = this.formValidation();
+      let setisValid = this.formValidation(username);
+        username || user.Username
+        email || user.Email
+        birthdate || user.brithdate
+        password || undefined
       if (setisValid) {
         axios.put(`https://myflixcl.herokuapp.com/users/${user}`,
           {
@@ -72,9 +72,7 @@ export class ProfileView extends React.Component {
           { headers: { Authorization: `Bearer ${token}` } }
         )
           .then((response) => {
-            const data = response.data;
-            localStorage.setItem("user", data.Username);
-            console.log(data);
+            this.props.setUser(response.data);
             alert(user + " has been updated.");
             console.log(response);
           })
@@ -84,8 +82,13 @@ export class ProfileView extends React.Component {
       }
     }
 
-  formValidation() {
-    const user = localStorage.getItem("user");
+  formValidation( username, password, email, birthdate ) {
+    let { user } = this.props;
+      console.log(_e.target);
+    //const username = _e.target[0].value;
+    //const password = _e.target[1].value;
+    //const email = _e.target[2].value;
+    //const birthdate = _e.target[3].value;
     let UsernameError = {};
     let EmailError = {};
     let PasswordError = {};
@@ -142,7 +145,6 @@ export class ProfileView extends React.Component {
                   <FormControl size="sm"
                     type="text"
                     name="Username"
-                    value={this.state.Username}
                     onChange={(e) => this.handleChange(e)}
                     placeholder={user.Username} />
                   {Object.keys(UsernameError).map((key) => {
@@ -159,7 +161,6 @@ export class ProfileView extends React.Component {
                   <FormControl size="sm"
                     type="password"
                     name="Password"
-                    value={this.state.Password}
                     onChange={(e) => this.handleChange(e)}
                     placeholder="Enter current or new password" />
                   {Object.keys(PasswordError).map((key) => {
@@ -177,7 +178,6 @@ export class ProfileView extends React.Component {
                     size="sm"
                     type="email"
                     name="Email"
-                    value={this.state.Email}
                     onChange={(e) => this.handleChange(e)}
                     placeholder={user.Email} />
                   {Object.keys(EmailError).map((key) => {
@@ -195,7 +195,6 @@ export class ProfileView extends React.Component {
                     size="sm"
                     type="text"
                     name="Birthdate"
-                    value={this.state.Birthdate}
                     onChange={(e) => this.handleChange(e)}
                     placeholder={user.Birthdate} />
                   {Object.keys(BirthdateError).map((key) => {

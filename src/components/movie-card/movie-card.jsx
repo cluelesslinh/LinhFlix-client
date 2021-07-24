@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import { connect } from 'react-redux';
+import { Button, Card } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 import './movie-card.scss';
@@ -41,3 +41,9 @@ export class MovieCard extends React.Component {
     );
   }
 }
+
+let mapStateToProps = state => {
+  return {movies: state.movies }
+}
+
+export default connect(mapStateToProps)(MovieCard);

@@ -1,11 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import { Card } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import './movie-view.scss';
 
@@ -42,19 +39,19 @@ export class MovieView extends React.Component {
         </Col>
         <Col md={8} className="movie-genre rowGap">
          <span className="label">Genre: </span>
-        <Link class="linkButton" to={`/genres/${movie.Genre.Name}`}>
+        <Link className="linkButton" to={`/genres/${movie.Genre.Name}`}>
          <span className="value">{movie.Genre.Name}</span>
         </Link>
       </Col>
         <Col md={8} className="movie-director rowGap">
          <span className="label">Director: </span>
-        <Link class="linkButton" to={`/directors/${movie.Director.Name}`}>
+        <Link className="linkButton" to={`/directors/${movie.Director.Name}`}>
          <span className="value">{movie.Director.Name}</span>
          </Link>
        </Col>
        <Col md={8}>
-        <button class="buttonBottom" onClick={() => { onBackClick(null); }}>Back</button>
-        <button class="buttonBottom" onClick={() => this.handleAdd(movie)}>Add to favorite</button>
+        <button className="buttonBottom" onClick={() => { onBackClick(null); }}>Back</button>
+        <button className="buttonBottom" onClick={() => this.handleAdd(movie)}>Add to favorite</button>
         </Col>
       </Row>
     );
