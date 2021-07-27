@@ -28,7 +28,7 @@ export class ProfileView extends React.Component {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response);
+        this.props.setUser(response.data);
         alert(movie.Title + " removed from your Favorites.");
       });
   }
@@ -42,6 +42,7 @@ export class ProfileView extends React.Component {
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then(() => {
+        this.props.setUser(null)
         alert(user + " has been deleted.");
         localStorage.removeItem("user");
         localStorage.removeItem("token");
@@ -52,61 +53,55 @@ export class ProfileView extends React.Component {
       });
   }
 
-  handleUpdate(_e) {
-      let token = localStorage.getItem("token");
-      let user = localStorage.getItem("user");
-      console.log(this.state);
-      let setisValid = this.formValidation(username);
-        username || user.Username
-        email || user.Email
-        birthdate || user.brithdate
-        password || undefined
+  handleUpdate(e) {
+    e.preventDefault();
+    const { user } = this.props;
+     console.log(e.target);
+    const username = e.target[0].value;
+    const password = e.target[1].value;
+    const email = e.target[2].value;
+    const birthdate = e.target[3].value;
+    let token = localStorage.getItem("token");
+      let setisValid = this.formValidation(username, password, email, birthdate);
       if (setisValid) {
-        axios.put(`https://myflixcl.herokuapp.com/users/${user}`,
-          {
-            Username: user.Username,
-            Password: user.Password,
-            Email: user.Email,
-            Birthdate: user.Birthdate,
-          },
-          { headers: { Authorization: `Bearer ${token}` } }
+        axios.put(`https://myflixcl.herokuapp.com/users/${localStorage.getItem("user")}`,
+        { headers: { Authorization: `Bearer ${token}` } },
+            username || user.Username,
+            password || undefined,
+            email || user.Email,
+            birthdate || user.Birthdate,
         )
           .then((response) => {
-            this.props.setUser(response.data);
-            alert(user + " has been updated.");
+            localStorage.setItem("user", response.data.Username)
+            alert(user.Username + " has been updated.");
             console.log(response);
           })
           .catch(function (error) {
+            alert("Something went wrong...")
             console.log(error.response.data);
           });
       }
     }
 
   formValidation( username, password, email, birthdate ) {
-    let { user } = this.props;
-      console.log(_e.target);
-    //const username = _e.target[0].value;
-    //const password = _e.target[1].value;
-    //const email = _e.target[2].value;
-    //const birthdate = _e.target[3].value;
     let UsernameError = {};
     let EmailError = {};
     let PasswordError = {};
     let BirthdateError = {};
     let isValid = true;
-    if (user.Username.trim().length < 5) {
+    if (username.trim().length < 5) {
       UsernameError.usernameShort = "Must be alphanumeric and contains at least 5 characters";
       isValid = false;
     }
-    if (user.Password.trim().length < 3) {
+    if (password.trim().length < 3) {
       PasswordError.passwordMissing = "You must enter a current or new password.(minimum 4 characters) ";
       isValid = false;
     }
-    if (!(user.Email && user.Email.includes(".") && user.Email.includes("@"))) {
+    if (!(email && email.includes(".") && email.includes("@"))) {
       EmailError.emailNotEmail = "A valid email address is required.";
       isValid = false;
     }
-    if (user.Birthdate === '') {
+    if (birthdate === '') {
       BirthdateError.birthdateEmpty = "Please enter your birthdate.";
       isValid = false;
     }
@@ -207,16 +202,14 @@ export class ProfileView extends React.Component {
 
                 </Form.Group>
 
-                <Link to={`/users/${user.Username}`}>
                   <Button className="mb-2" variant="dark"
-                    type="link"
+                    type="submit"
                     size="md"
                     block
-                    onClick={(e) => this.handleUpdate(e)}
+                    onClick={() => this.handleUpdate(e)}
                   >
                     Save changes
                     </Button>
-                </Link>
 
                 <Link to={`/`}>
                   <Button className="mb-2"

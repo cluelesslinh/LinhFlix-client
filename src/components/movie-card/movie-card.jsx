@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { setUser } from '../../actions/actions';
 
 import './movie-card.scss';
 
@@ -16,7 +17,7 @@ export class MovieCard extends React.Component {
       { headers: { Authorization: `Bearer ${token}` } }
     )
       .then((response) => {
-        console.log(response);
+        this.props.setUser(response.data)
         alert(this.props.movie.Title + " has been added to your favorites!");
       })
   }
@@ -43,7 +44,7 @@ export class MovieCard extends React.Component {
 }
 
 let mapStateToProps = state => {
-  return {movies: state.movies }
+  return {movies: state.movies, user: state.user }
 }
 
-export default connect(mapStateToProps)(MovieCard);
+export default connect(mapStateToProps, {setUser})(MovieCard);
