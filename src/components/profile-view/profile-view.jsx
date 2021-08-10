@@ -64,14 +64,16 @@ export class ProfileView extends React.Component {
     let token = localStorage.getItem("token");
       let setisValid = this.formValidation(username, password, email, birthdate);
       if (setisValid) {
-        axios.put(`https://myflixcl.herokuapp.com/users/${localStorage.getItem("user")}`,
-        { headers: { Authorization: `Bearer ${token}` } },
-            username || user.Username,
-            password || undefined,
-            email || user.Email,
-            birthdate || user.Birthdate,
-        )
+        axios.put(`https://myflixcl.herokuapp.com/users/${localStorage.getItem("user")},`,
+        {
+          username || user.Username,
+          password || undefined,
+          email || user.Email,
+          birthdate || user.Birthdate,
+           {headers: { Authorization: `Bearer ${token}` }}
+          )
           .then((response) => {
+            this.props.setUser(response.data)
             localStorage.setItem("user", response.data.Username)
             alert(user.Username + " has been updated.");
             console.log(response);
@@ -132,7 +134,7 @@ export class ProfileView extends React.Component {
         <Container>
           <Row className="justify-content-md-center">
             <Col md={12}>
-              <Form className="justify-content-md-center mb-30">
+              <Form className="justify-content-md-center mb-30" onSubmit={(e) => this.handleUpdate(e)}>
                 <h1 style={{ textAlign: "center" }}>My Account</h1>
 
                 <Form.Group controlId="formUsername">
@@ -206,7 +208,6 @@ export class ProfileView extends React.Component {
                     type="submit"
                     size="md"
                     block
-                    onClick={() => this.handleUpdate(e)}
                   >
                     Save changes
                     </Button>
