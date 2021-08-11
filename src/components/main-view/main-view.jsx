@@ -140,7 +140,7 @@ class MainView extends React.Component {
                     <Link to={`/users/${user.Username}`}>
                       <Button variant="link" className="navbar-link text-light">
                         Profile
-                    </Button>
+                      </Button>
                     </Link>
                     <Link to={`/`}>
                       <Button
@@ -149,7 +149,7 @@ class MainView extends React.Component {
                         onClick={() => this.onLoggedOut()}
                       >
                         Logout
-                    </Button>
+                      </Button>
                     </Link >
                   </ul >
                 )
@@ -194,7 +194,7 @@ class MainView extends React.Component {
                 </Col>
               }} />
 
-              <Route path="/directors/:name" render={({ match, history }) => {
+            <Route exact path="/directors/:name" render={({ match, history }) => {
                 if (!user) return <Col>
                   <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                 </Col>
@@ -205,18 +205,20 @@ class MainView extends React.Component {
               }
               } />
 
-              <Route path="/genres/" render={({ match, history }) => {
+            <Route exact path="/genres" render={({ history }) => {
                 if (!user) return <Col>
                   <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                 </Col>
                 if (movies.length === 0) return <div className="main-view" />;
                 return <Col md={8}>
-                  <GenreList genre={movies.find(m => m.Genre.Name === match.params.name)} onBackClick={() => history.goBack()} />
+                  <GenreList genres={movies.reduce((genres, movie) =>
+                  !genres.find((g) => g.Name === movie.Genre.Name)
+                  ?[...genres, movie.Genre] : genres, [] )}
+                  onBackClick={() => history.goBack()} />
                 </Col>
-              }
-              } />
+              }} />
 
-              <Route path="/genres/:name" render={({ match, history }) => {
+            <Route exact path="/genres/:name" render={({ match, history }) => {
                 if (!user) return <Col>
                   <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                 </Col>

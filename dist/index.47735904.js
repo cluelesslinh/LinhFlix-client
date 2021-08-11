@@ -25094,6 +25094,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
+            exact: true,
             path: "/directors/:name",
             render: ({ match , history  })=>{
                 if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
@@ -25116,8 +25117,9 @@ class MainView extends _reactDefault.default.Component {
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
-            path: "/genres/",
-            render: ({ match , history  })=>{
+            exact: true,
+            path: "/genres",
+            render: ({ history  })=>{
                 if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
                     onLoggedIn: (user1)=>this.onLoggedIn(user1)
                 })));
@@ -25127,8 +25129,12 @@ class MainView extends _reactDefault.default.Component {
                 return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
                     md: 8
                 }, /*#__PURE__*/ _reactDefault.default.createElement(_genreList.GenreList, {
-                    genre: movies.find((m)=>m.Genre.Name === match.params.name
-                    ),
+                    genres: movies.reduce((genres, movie)=>!genres.find((g)=>g.Name === movie.Genre.Name
+                        ) ? [
+                            ...genres,
+                            movie.Genre
+                        ] : genres
+                    , []),
                     onBackClick: ()=>history.goBack()
                 })));
             },
@@ -25138,6 +25144,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __self: this
         }), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Route, {
+            exact: true,
             path: "/genres/:name",
             render: ({ match , history  })=>{
                 if (!user) return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/ _reactDefault.default.createElement(_loginView.LoginView, {
@@ -25156,7 +25163,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/main-view/main-view.jsx",
-                lineNumber: 219
+                lineNumber: 221
             },
             __self: this
         })))));
@@ -41943,149 +41950,35 @@ class GenreList extends _reactDefault.default.Component {
                 lineNumber: 12
             },
             __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+        }, "genres.map( (genre) =>", /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
             md: 8,
             className: "rowGap",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 13
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
-            className: "linkButton",
-            to: `/genres/Action`,
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
                 lineNumber: 14
             },
             __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement("span", {
-            className: "label",
+        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
+            className: "linkButton",
+            to: `/genres/${genre.Name}`,
+            key: "_id",
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
                 lineNumber: 15
             },
             __self: this
-        }, "Action"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
-            md: 8,
-            className: "rowGap",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 18
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
-            className: "linkButton",
-            to: `/genres/Animation`,
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 19
-            },
-            __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement("span", {
             className: "label",
+            __source: {
+                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
+                lineNumber: 16
+            },
+            __self: this
+        }, genre.Name))), ")", /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+            md: 8,
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
                 lineNumber: 20
-            },
-            __self: this
-        }, "Animation"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
-            md: 8,
-            className: "rowGap",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 23
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
-            className: "linkButton",
-            to: `/genres/Comedy`,
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 24
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement("span", {
-            className: "label",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 25
-            },
-            __self: this
-        }, "Comedy"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
-            md: 8,
-            className: "rowGap",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 28
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
-            className: "linkButton",
-            to: `/genres/Fantasy`,
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 29
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement("span", {
-            className: "label",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 30
-            },
-            __self: this
-        }, "Fantasy: "))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
-            md: 8,
-            className: "rowGap",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 33
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
-            className: "linkButton",
-            to: `/genres/Martial%20Arts`,
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 34
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement("span", {
-            className: "label",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 35
-            },
-            __self: this
-        }, "Martial Arts"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
-            md: 8,
-            className: "rowGap",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 38
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
-            className: "linkButton",
-            to: `/genres/Thriller`,
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 39
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement("span", {
-            className: "label",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 40
-            },
-            __self: this
-        }, "Thriller"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
-            md: 8,
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 43
             },
             __self: this
         }, /*#__PURE__*/ _reactDefault.default.createElement("button", {
@@ -42095,7 +41988,7 @@ class GenreList extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 44
+                lineNumber: 21
             },
             __self: this
         }, "Back"))));
@@ -42470,7 +42363,12 @@ class ProfileView extends _reactDefault.default.Component {
         const birthdate = e.target[3].value;
         let token = localStorage.getItem("token");
         let setisValid = this.formValidation(username, password, email, birthdate);
-        if (setisValid) _axiosDefault.default.put(`https://myflixcl.herokuapp.com/users/${localStorage.getItem("user")}`, username || user.Username, password || undefined, email || user.Email, birthdate || user.Birthdate, {
+        if (setisValid) _axiosDefault.default.put(`https://myflixcl.herokuapp.com/users/${localStorage.getItem("user")}`, {
+            Username: username || user.Username,
+            Password: password || undefined,
+            Email: email || user.Email,
+            Birthdate: birthdate || user.Birthdate
+        }, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

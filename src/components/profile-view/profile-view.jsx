@@ -64,14 +64,13 @@ export class ProfileView extends React.Component {
     let token = localStorage.getItem("token");
       let setisValid = this.formValidation(username, password, email, birthdate);
       if (setisValid) {
-        axios.put(`https://myflixcl.herokuapp.com/users/${localStorage.getItem("user")},`,
-        {
-          username || user.Username,
-          password || undefined,
-          email || user.Email,
-          birthdate || user.Birthdate,
-           {headers: { Authorization: `Bearer ${token}` }}
-          )
+        axios.put(`https://myflixcl.herokuapp.com/users/${localStorage.getItem("user")}`,
+         { Username: username || user.Username,
+           Password: password || undefined,
+           Email: email || user.Email,
+           Birthdate: birthdate || user.Birthdate },
+           {headers: { Authorization: `Bearer ${token}`}}
+         )
           .then((response) => {
             this.props.setUser(response.data)
             localStorage.setItem("user", response.data.Username)
