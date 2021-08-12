@@ -10,15 +10,15 @@ export class GenreList extends React.Component {
 
     return (
       <Row className="genre-list justify-content-md-center">
-        genres.map( (genre) =>
+        {genres.map((genre) =>
           <Col md={8} className="rowGap">
             <Link className="linkButton" to={`/genres/${genre.Name}`} key="_id">
              <span className="label">{genre.Name}</span>
            </Link>
           </Col>
-        )
+        )}
         <Col md={8}>
-        <button class="buttonBottom" onClick={() => { onBackClick(null); }}>Back</button>
+         <button class="buttonBottom" onClick={() => { onBackClick(null); }}>Back</button>
         </Col>
       </Row>
   )}}

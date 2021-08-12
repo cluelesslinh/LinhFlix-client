@@ -41950,31 +41950,32 @@ class GenreList extends _reactDefault.default.Component {
                 lineNumber: 12
             },
             __self: this
-        }, "genres.map( (genre) =>", /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
-            md: 8,
-            className: "rowGap",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 14
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
-            className: "linkButton",
-            to: `/genres/${genre.Name}`,
-            key: "_id",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 15
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement("span", {
-            className: "label",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 16
-            },
-            __self: this
-        }, genre.Name))), ")", /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+        }, genres.map((genre)=>/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+                md: 8,
+                className: "rowGap",
+                __source: {
+                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
+                    lineNumber: 14
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
+                className: "linkButton",
+                to: `/genres/${genre.Name}`,
+                key: "_id",
+                __source: {
+                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
+                    lineNumber: 15
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement("span", {
+                className: "label",
+                __source: {
+                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
+                    lineNumber: 16
+                },
+                __self: this
+            }, genre.Name)))
+        ), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
             md: 8,
             __source: {
                 fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
