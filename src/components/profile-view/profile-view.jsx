@@ -56,7 +56,6 @@ export class ProfileView extends React.Component {
   handleUpdate(e) {
     e.preventDefault();
     const { user } = this.props;
-     console.log(e.target);
     const username = e.target[0].value;
     const password = e.target[1].value;
     const email = e.target[2].value;
