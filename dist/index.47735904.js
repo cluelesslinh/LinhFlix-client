@@ -24006,7 +24006,7 @@ var _selectorFactory = _interopRequireDefault(require("./selectorFactory"));
   selectorFactory, which has the signature:
 
     (dispatch, options) => (nextState, nextOwnProps) => nextFinalProps
-
+  
   connect passes its args to connectAdvanced as options, which will in turn pass them to
   selectorFactory each time a Connect component instance is instantiated or hot reloaded.
 
@@ -24678,8 +24678,6 @@ function user(state = null, action) {
     switch(action.type){
         case _actions.SET_USER:
             return action.value;
-        case _actions.UPDATE_USER:
-            return action.value;
         default:
             return state;
     }
@@ -24700,25 +24698,15 @@ parcelHelpers.export(exports, "SET_FILTER", ()=>SET_FILTER
 );
 parcelHelpers.export(exports, "SET_USER", ()=>SET_USER
 );
-parcelHelpers.export(exports, "UPDATE_USER", ()=>UPDATE_USER
-);
-parcelHelpers.export(exports, "DELETE_USER", ()=>DELETE_USER
-);
 parcelHelpers.export(exports, "setMovies", ()=>setMovies
 );
 parcelHelpers.export(exports, "setFilter", ()=>setFilter
 );
 parcelHelpers.export(exports, "setUser", ()=>setUser
 );
-parcelHelpers.export(exports, "updateUser", ()=>updateUser
-);
-parcelHelpers.export(exports, "deleteUser", ()=>deleteUser
-);
 const SET_MOVIES = 'SET_MOVIES';
 const SET_FILTER = 'SET_FILTER';
 const SET_USER = 'SET_USER';
-const UPDATE_USER = 'UPDATE_USER';
-const DELETE_USER = 'DELETE_USER';
 function setMovies(value) {
     return {
         type: SET_MOVIES,
@@ -24734,18 +24722,6 @@ function setFilter(value) {
 function setUser(value) {
     return {
         type: SET_USER,
-        value
-    };
-}
-function updateUser(value) {
-    return {
-        type: UPDATE_USER,
-        value
-    };
-}
-function deleteUser(value) {
-    return {
-        type: DELETE_USER,
         value
     };
 }
@@ -31360,7 +31336,7 @@ exports.default = getComputedStyle;
 var _ownerWindow = _interopRequireDefault(require("./ownerWindow"));
 /**
  * Returns one or all computed style properties of an element.
- *
+ * 
  * @param node the element
  * @param psuedoElement the style property
  */ function getComputedStyle(node, psuedoElement) {
@@ -31376,7 +31352,7 @@ exports.default = ownerWindow;
 var _ownerDocument = _interopRequireDefault(require("./ownerDocument"));
 /**
  * Returns the owner window of a given element.
- *
+ * 
  * @param node the element
  */ function ownerWindow(node) {
     var doc = _ownerDocument.default(node);
@@ -31390,7 +31366,7 @@ exports.__esModule = true;
 exports.default = ownerDocument;
 /**
  * Returns the owner document of a given element.
- *
+ * 
  * @param node the element
  */ function ownerDocument(node) {
     return node && node.ownerDocument || document;
@@ -32128,7 +32104,7 @@ try {
 /* */ }
 /**
  * An `addEventListener` ponyfill, supports the `once` option
- *
+ * 
  * @param node the element
  * @param eventName the event name
  * @param handle the handler
@@ -32165,7 +32141,7 @@ exports.__esModule = true;
 exports.default = void 0;
 /**
  * A `removeEventListener` ponyfill
- *
+ * 
  * @param node the element
  * @param eventName the event name
  * @param handle the handler
@@ -32185,7 +32161,7 @@ exports.__esModule = true;
 exports.default = triggerEvent;
 /**
  * Triggers an event on a given element.
- *
+ * 
  * @param node the element
  * @param eventName the event name to trigger
  * @param bubbles whether the event should bubble up
@@ -34032,7 +34008,7 @@ exports.default = matches;
 var matchesImpl;
 /**
  * Checks if a given element matches a selector.
- *
+ * 
  * @param node the element
  * @param selector the selector
  */ function matches(node, selector) {
@@ -34054,7 +34030,7 @@ exports.default = qsa;
 var toArray = Function.prototype.bind.call(Function.prototype.call, [].slice);
 /**
  * Runs `querySelectorAll` on a given element.
- *
+ * 
  * @param element the element
  * @param selector the selector
  */ function qsa(element, selector) {
@@ -36036,7 +36012,7 @@ const createPopper = popperGenerator({
         offset$1,
         flip$1,
         preventOverflow$1,
-        arrow$1,
+        arrow$1, 
     ]
 });
 exports.createPopper = createPopper;
@@ -36149,7 +36125,7 @@ exports.__esModule = true;
 exports.default = contains;
 /* eslint-disable no-bitwise, no-cond-assign */ /**
  * Checks if an element contains another given element.
- *
+ * 
  * @param context the context element
  * @param node the element to check
  */ function contains(context, node) {
@@ -36800,7 +36776,7 @@ exports.__esModule = true;
 exports.default = hasClass;
 /**
  * Checks if a given element has a CSS class.
- *
+ * 
  * @param element the element
  * @param className the CSS class name
  */ function hasClass(element, className) {
@@ -38449,7 +38425,7 @@ exports.default = addClass;
 var _hasClass = _interopRequireDefault(require("./hasClass"));
 /**
  * Adds a CSS class to a given element.
- *
+ * 
  * @param element the element
  * @param className the CSS class name
  */ function addClass(element, className) {
@@ -38470,7 +38446,7 @@ function replaceClassName(origClass, classToRemove) {
 }
 /**
  * Removes a CSS class from a given element.
- *
+ * 
  * @param element the element
  * @param className the CSS class name
  */ function removeClass(element, className) {
@@ -41444,16 +41420,7 @@ class MovieView extends _reactDefault.default.Component {
                 lineNumber: 57
             },
             __self: this
-        }, "Back"), /*#__PURE__*/ _reactDefault.default.createElement("button", {
-            className: "buttonBottom",
-            onClick: ()=>this.handleAdd(movie)
-            ,
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/movie-view/movie-view.jsx",
-                lineNumber: 58
-            },
-            __self: this
-        }, "Add to favorite"))));
+        }, "Back"))));
     }
 }
 
@@ -41478,8 +41445,8 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _reactBootstrap = require("react-bootstrap");
-var _loginViewScss = require("./login-view.scss");
 var _reactRouterDom = require("react-router-dom");
+var _loginViewScss = require("./login-view.scss");
 var _s = $RefreshSig$();
 function LoginView(props) {
     _s();
@@ -41501,54 +41468,54 @@ function LoginView(props) {
     return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form, {
         __source: {
             fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 30
+            lineNumber: 31
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
         className: "justify-content-md-center",
         __source: {
             fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 31
+            lineNumber: 32
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
         md: 8,
         __source: {
             fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 32
+            lineNumber: 33
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement("h1", {
         className: "title",
         __source: {
             fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 33
+            lineNumber: 34
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement("center", {
         __source: {
             fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 33
+            lineNumber: 34
         },
         __self: this
     }, "MYFLIX LOGIN"))), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
         md: 8,
         __source: {
             fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 35
+            lineNumber: 36
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
         controlId: "formUsername",
         __source: {
             fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 36
+            lineNumber: 37
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __source: {
             fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 37
+            lineNumber: 38
         },
         __self: this
     }, "Username:"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -41557,20 +41524,20 @@ function LoginView(props) {
         ,
         __source: {
             fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 38
+            lineNumber: 39
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Group, {
         controlId: "formPassword",
         __source: {
             fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 41
+            lineNumber: 42
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __source: {
             fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 42
+            lineNumber: 43
         },
         __self: this
     }, "Password:"), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -41579,7 +41546,7 @@ function LoginView(props) {
         ,
         __source: {
             fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 43
+            lineNumber: 44
         },
         __self: this
     })), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -41588,21 +41555,21 @@ function LoginView(props) {
         onClick: handleSubmit,
         __source: {
             fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 45
+            lineNumber: 46
         },
         __self: this
     }, "Login"), /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
         to: "/register",
         __source: {
             fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 46
+            lineNumber: 47
         },
         __self: this
     }, /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Button, {
         variant: "primary",
         __source: {
             fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/login-view/login-view.jsx",
-            lineNumber: 46
+            lineNumber: 47
         },
         __self: this
     }, "Register"))))));
