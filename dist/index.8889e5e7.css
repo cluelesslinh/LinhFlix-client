@@ -56,6 +56,14 @@ Form {
   margin-top: 1em;
 }
 
+.genre-list {
+  text-align: center;
+  color: #ffffff;
+}
+.director-list {
+  text-align: center;
+  color: #ffffff;
+}
 body {
   background-size: cover;
   background-attachment: fixed;

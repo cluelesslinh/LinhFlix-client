@@ -9,6 +9,7 @@ import { setUser, updateUser } from '../../actions/actions';
 import './profile-view.scss';
 
 export class ProfileView extends React.Component {
+
   constructor() {
     super();
     this.state = {
@@ -21,17 +22,13 @@ export class ProfileView extends React.Component {
 
   removeFavorite(movie) {
     const token = localStorage.getItem("token");
-    const url =
-      "https://myflixcl.herokuapp.com/users/" +
-      localStorage.getItem("user") +
-      "/movies/" +
-      movie._id;
+    const url = "https://myflixcl.herokuapp.com/users/" + localStorage.getItem("user") + "/movies/" + movie._id;
     axios
       .delete(url, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response);
+        this.props.setUser(response.data);
         alert(movie.Title + " removed from your Favorites.");
       });
   }
@@ -45,6 +42,7 @@ export class ProfileView extends React.Component {
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then(() => {
+        this.props.setUser(null)
         alert(user + " has been deleted.");
         localStorage.removeItem("user");
         localStorage.removeItem("token");
@@ -55,55 +53,56 @@ export class ProfileView extends React.Component {
       });
   }
 
-  handleUpdate(_e) {
-      let token = localStorage.getItem("token");
-      // console.log({ token });
-      let user = localStorage.getItem("user");
-      console.log(this.state);
-      let setisValid = this.formValidation();
+  handleUpdate(e) {
+    e.preventDefault();
+    const { user } = this.props;
+     console.log(e.target);
+    const username = e.target[0].value;
+    const password = e.target[1].value;
+    const email = e.target[2].value;
+    const birthdate = e.target[3].value;
+    let token = localStorage.getItem("token");
+      let setisValid = this.formValidation(username, password, email, birthdate);
       if (setisValid) {
-        axios.put(`https://myflixcl.herokuapp.com/users/${user}`,
-          {
-            Username: user.Username,
-            Password: user.Password,
-            Email: user.Email,
-            Birthdate: user.Birthdate,
-          },
-          { headers: { Authorization: `Bearer ${token}` } }
-        )
+        axios.put(`https://myflixcl.herokuapp.com/users/${localStorage.getItem("user")}`,
+         { Username: username || user.Username,
+           Password: password || undefined,
+           Email: email || user.Email,
+           Birthdate: birthdate || user.Birthdate },
+           {headers: { Authorization: `Bearer ${token}`}}
+         )
           .then((response) => {
-            const data = response.data;
-            localStorage.setItem("user", data.Username);
-            console.log(data);
-            alert(user + " has been updated.");
+            this.props.setUser(response.data)
+            localStorage.setItem("user", response.data.Username)
+            alert(user.Username + " has been updated.");
             console.log(response);
           })
           .catch(function (error) {
+            alert("Something went wrong...")
             console.log(error.response.data);
           });
       }
     }
 
-  formValidation() {
-    const user = localStorage.getItem("user");
+  formValidation( username, password, email, birthdate ) {
     let UsernameError = {};
     let EmailError = {};
     let PasswordError = {};
     let BirthdateError = {};
     let isValid = true;
-    if (user.Username.trim().length < 5) {
+    if (username.trim().length < 5) {
       UsernameError.usernameShort = "Must be alphanumeric and contains at least 5 characters";
       isValid = false;
     }
-    if (user.Password.trim().length < 3) {
+    if (password.trim().length < 3) {
       PasswordError.passwordMissing = "You must enter a current or new password.(minimum 4 characters) ";
       isValid = false;
     }
-    if (!(user.Email && user.Email.includes(".") && user.Email.includes("@"))) {
+    if (!(email && email.includes(".") && email.includes("@"))) {
       EmailError.emailNotEmail = "A valid email address is required.";
       isValid = false;
     }
-    if (user.Birthdate === '') {
+    if (birthdate === '') {
       BirthdateError.birthdateEmpty = "Please enter your birthdate.";
       isValid = false;
     }
@@ -134,7 +133,7 @@ export class ProfileView extends React.Component {
         <Container>
           <Row className="justify-content-md-center">
             <Col md={12}>
-              <Form className="justify-content-md-center mb-30">
+              <Form className="justify-content-md-center mb-30" onSubmit={(e) => this.handleUpdate(e)}>
                 <h1 style={{ textAlign: "center" }}>My Account</h1>
 
                 <Form.Group controlId="formUsername">
@@ -142,7 +141,6 @@ export class ProfileView extends React.Component {
                   <FormControl size="sm"
                     type="text"
                     name="Username"
-                    value={this.state.Username}
                     onChange={(e) => this.handleChange(e)}
                     placeholder={user.Username} />
                   {Object.keys(UsernameError).map((key) => {
@@ -159,7 +157,6 @@ export class ProfileView extends React.Component {
                   <FormControl size="sm"
                     type="password"
                     name="Password"
-                    value={this.state.Password}
                     onChange={(e) => this.handleChange(e)}
                     placeholder="Enter current or new password" />
                   {Object.keys(PasswordError).map((key) => {
@@ -177,7 +174,6 @@ export class ProfileView extends React.Component {
                     size="sm"
                     type="email"
                     name="Email"
-                    value={this.state.Email}
                     onChange={(e) => this.handleChange(e)}
                     placeholder={user.Email} />
                   {Object.keys(EmailError).map((key) => {
@@ -195,7 +191,6 @@ export class ProfileView extends React.Component {
                     size="sm"
                     type="text"
                     name="Birthdate"
-                    value={this.state.Birthdate}
                     onChange={(e) => this.handleChange(e)}
                     placeholder={user.Birthdate} />
                   {Object.keys(BirthdateError).map((key) => {
@@ -208,16 +203,13 @@ export class ProfileView extends React.Component {
 
                 </Form.Group>
 
-                <Link to={`/users/${user.Username}`}>
                   <Button className="mb-2" variant="dark"
-                    type="link"
+                    type="submit"
                     size="md"
                     block
-                    onClick={(e) => this.handleUpdate(e)}
                   >
                     Save changes
                     </Button>
-                </Link>
 
                 <Link to={`/`}>
                   <Button className="mb-2"

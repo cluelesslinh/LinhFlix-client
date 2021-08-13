@@ -12,7 +12,7 @@ export class DirectorView extends React.Component {
     return (
       <Row className="director-view justify-content-md-center">
         <Col md={8} className="director-poster rowGap">
-          <img class="directorImage" src={director.ImagePath} />
+          <img className="directorImage" src={director.ImagePath} />
         </Col>
         <Col md={8} className="director-title rowGap">
           <span className="label">Director: </span>
@@ -31,7 +31,7 @@ export class DirectorView extends React.Component {
           <span className="value">{director.Death}</span>
         </Col>
         <Col md={8}>
-        <button class="buttonBottom" onClick={() => { onBackClick(null); }}>Back</button>
+        <button className="buttonBottom" onClick={() => { onBackClick(null); }}>Back</button>
         </Col>
       </Row>
     );

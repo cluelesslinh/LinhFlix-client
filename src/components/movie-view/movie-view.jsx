@@ -38,20 +38,23 @@ export class MovieView extends React.Component {
           <span className="value">{movie.Description}</span>
         </Col>
         <Col md={8} className="movie-genre rowGap">
+        <Link className="linkButton" to={`/genres`}>
          <span className="label">Genre: </span>
-        <Link class="linkButton" to={`/genres/${movie.Genre.Name}`}>
+       </Link>
+        <Link className="linkButton" to={`/genres/${movie.Genre.Name}`}>
          <span className="value">{movie.Genre.Name}</span>
         </Link>
       </Col>
         <Col md={8} className="movie-director rowGap">
+        <Link className="linkButton" to={`/directors`}>
          <span className="label">Director: </span>
-        <Link class="linkButton" to={`/directors/${movie.Director.Name}`}>
+        </Link>
+        <Link className="linkButton" to={`/directors/${movie.Director.Name}`}>
          <span className="value">{movie.Director.Name}</span>
          </Link>
        </Col>
        <Col md={8}>
-        <button class="buttonBottom" onClick={() => { onBackClick(null); }}>Back</button>
-        <button class="buttonBottom" onClick={() => this.handleAdd(movie)}>Add to favorite</button>
+        <button className="buttonBottom" onClick={() => { onBackClick(null); }}>Back</button>
         </Col>
       </Row>
     );
