@@ -115,9 +115,9 @@ class MainView extends React.Component {
               expand="lg"
               className="navbar mb-5 bg-dk"
             >
-              <Navbar.Brand href="https://myflixcl.netlify.app" className="navbar-brand">
+              <Link to="https://myflixcl.netlify.app" className="navbar-brand">
                 myFlix
-            </Navbar.Brand>
+            </Link>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse
                 className="justify-content-end"
