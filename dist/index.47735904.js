@@ -25213,7 +25213,7 @@ exports.default = _reactRedux.connect(mapStateToProps, {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","axios":"7rA65","react-redux":"7GDa4","react-router-dom":"1PMSK","../../actions/actions":"5S6cN","../movies-list/movies-list":"7bn3h","../movie-view/movie-view":"5XHdV","../login-view/login-view":"107Gi","../registration-view/registration-view":"1TW32","../genre-list/genre-list":"2ejG1","../genre-view/genre-view":"5gORz","../director-view/director-view":"Y3GrI","../profile-view/profile-view":"74wtw","react-bootstrap":"4n7hB","./main-view.scss":"zLp5T","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","../director-list/director-list":"6CSGs"}],"7rA65":[function(require,module,exports) {
+},{"react":"3b2NM","axios":"7rA65","react-redux":"7GDa4","react-router-dom":"1PMSK","../../actions/actions":"5S6cN","../movies-list/movies-list":"7bn3h","../movie-view/movie-view":"5XHdV","../login-view/login-view":"107Gi","../registration-view/registration-view":"1TW32","../genre-view/genre-view":"5gORz","../director-view/director-view":"Y3GrI","../profile-view/profile-view":"74wtw","react-bootstrap":"4n7hB","./main-view.scss":"zLp5T","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","../genre-list/genre-list":"2ejG1","../director-list/director-list":"6CSGs"}],"7rA65":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"4qfhW"}],"4qfhW":[function(require,module,exports) {
@@ -30381,7 +30381,7 @@ exports.default = _reactRedux.connect(mapStateToProps, {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","axios":"7rA65","react-redux":"7GDa4","react-bootstrap":"4n7hB","react-router-dom":"1PMSK","../../actions/actions":"5S6cN","./movie-card.scss":"2CA2a","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"4n7hB":[function(require,module,exports) {
+},{"react":"3b2NM","axios":"7rA65","react-router-dom":"1PMSK","./movie-card.scss":"2CA2a","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","react-redux":"7GDa4","react-bootstrap":"4n7hB","../../actions/actions":"5S6cN"}],"2CA2a":[function() {},{}],"4n7hB":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
@@ -41248,7 +41248,7 @@ var _default = Tooltip;
 exports.default = _default;
 module.exports = exports["default"];
 
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","prop-types-extra/lib/isRequiredForA11y":"4XrEc","./ThemeProvider":"4rz1S"}],"2CA2a":[function() {},{}],"5XHdV":[function(require,module,exports) {
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","prop-types-extra/lib/isRequiredForA11y":"4XrEc","./ThemeProvider":"4rz1S"}],"5XHdV":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -41960,84 +41960,7 @@ $RefreshReg$(_c, "RegistrationView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","react-bootstrap/Form":"6A5ko","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","axios":"7rA65","prop-types":"4dfy5","./registration-view.scss":"5dz5S","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"5dz5S":[function() {},{}],"2ejG1":[function(require,module,exports) {
-var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-helpers.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "GenreList", ()=>GenreList
-);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _reactRouterDom = require("react-router-dom");
-var _reactBootstrap = require("react-bootstrap");
-var _genreListScss = require("./genre-list.scss");
-class GenreList extends _reactDefault.default.Component {
-    render() {
-        const { genres , onBackClick  } = this.props;
-        return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
-            className: "genre-list justify-content-md-center",
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 12
-            },
-            __self: this
-        }, genres.map((genre)=>/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
-                md: 8,
-                className: "rowGap",
-                key: genre.Name,
-                __source: {
-                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                    lineNumber: 14
-                },
-                __self: this
-            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
-                className: "linkButton",
-                to: `/genres/${genre.Name}`,
-                __source: {
-                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                    lineNumber: 15
-                },
-                __self: this
-            }, /*#__PURE__*/ _reactDefault.default.createElement("span", {
-                className: "label",
-                __source: {
-                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                    lineNumber: 16
-                },
-                __self: this
-            }, genre.Name)))
-        ), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
-            md: 8,
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 20
-            },
-            __self: this
-        }, /*#__PURE__*/ _reactDefault.default.createElement("button", {
-            className: "buttonBottom",
-            onClick: ()=>{
-                onBackClick(null);
-            },
-            __source: {
-                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
-                lineNumber: 21
-            },
-            __self: this
-        }, "Back"))));
-    }
-}
-
-  helpers.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react":"3b2NM","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","./genre-list.scss":"7p9SJ","react-bootstrap":"4n7hB","react-router-dom":"1PMSK"}],"7p9SJ":[function() {},{}],"5gORz":[function(require,module,exports) {
+},{"react":"3b2NM","react-bootstrap/Form":"6A5ko","react-bootstrap/Button":"1ru0l","react-bootstrap/Row":"3fzwD","react-bootstrap/Col":"2D0r8","axios":"7rA65","prop-types":"4dfy5","./registration-view.scss":"5dz5S","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"5dz5S":[function() {},{}],"5gORz":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -42817,7 +42740,84 @@ exports.default = _reactRedux.connect(mapStateToProps, {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"3b2NM","prop-types":"4dfy5","react-redux":"7GDa4","axios":"7rA65","react-bootstrap":"4n7hB","react-router-dom":"1PMSK","../../actions/actions":"5S6cN","./profile-view.scss":"6Quhy","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"6Quhy":[function() {},{}],"zLp5T":[function() {},{}],"6CSGs":[function(require,module,exports) {
+},{"react":"3b2NM","prop-types":"4dfy5","react-redux":"7GDa4","axios":"7rA65","react-bootstrap":"4n7hB","react-router-dom":"1PMSK","../../actions/actions":"5S6cN","./profile-view.scss":"6Quhy","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"6Quhy":[function() {},{}],"zLp5T":[function() {},{}],"2ejG1":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "GenreList", ()=>GenreList
+);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRouterDom = require("react-router-dom");
+var _reactBootstrap = require("react-bootstrap");
+var _genreListScss = require("./genre-list.scss");
+class GenreList extends _reactDefault.default.Component {
+    render() {
+        const { genres , onBackClick  } = this.props;
+        return(/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Row, {
+            className: "genre-list justify-content-md-center",
+            __source: {
+                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
+                lineNumber: 12
+            },
+            __self: this
+        }, genres.map((genre)=>/*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+                md: 8,
+                className: "rowGap",
+                key: genre.Name,
+                __source: {
+                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
+                    lineNumber: 14
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement(_reactRouterDom.Link, {
+                className: "linkButton",
+                to: `/genres/${genre.Name}`,
+                __source: {
+                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
+                    lineNumber: 15
+                },
+                __self: this
+            }, /*#__PURE__*/ _reactDefault.default.createElement("span", {
+                className: "label",
+                __source: {
+                    fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
+                    lineNumber: 16
+                },
+                __self: this
+            }, genre.Name)))
+        ), /*#__PURE__*/ _reactDefault.default.createElement(_reactBootstrap.Col, {
+            md: 8,
+            __source: {
+                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
+                lineNumber: 20
+            },
+            __self: this
+        }, /*#__PURE__*/ _reactDefault.default.createElement("button", {
+            className: "buttonBottom",
+            onClick: ()=>{
+                onBackClick(null);
+            },
+            __source: {
+                fileName: "/Users/linhpham/Documents/GitHub/myFlix-client/src/components/genre-list/genre-list.jsx",
+                lineNumber: 21
+            },
+            __self: this
+        }, "Back"))));
+    }
+}
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"3b2NM","react-router-dom":"1PMSK","react-bootstrap":"4n7hB","./genre-list.scss":"7p9SJ","@parcel/transformer-js/src/esmodule-helpers.js":"367CR","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"7p9SJ":[function() {},{}],"6CSGs":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
