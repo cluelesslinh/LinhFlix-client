@@ -55,6 +55,7 @@ export class MovieView extends React.Component {
        </Col>
        <Col md={8}>
         <button className="buttonBottom" onClick={() => { onBackClick(null); }}>Back</button>
+        <button className="buttonBottom" onClick={() => this.handleAdd(movie)}>Add to favorite</button>
         </Col>
       </Row>
     );
