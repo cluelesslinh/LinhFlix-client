@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import axios from "axios";
 import { Container, Card, FormControl, Button, Form, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { setUser, updateUser } from '../../actions/actions';
+import { setUser } from '../../actions/actions';
 
 import './profile-view.scss';
 
