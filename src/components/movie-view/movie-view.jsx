@@ -46,7 +46,9 @@ export class MovieView extends React.Component {
         </Link>
       </Col>
         <Col md={8} className="movie-director rowGap">
+        <Link className="linkButton" to={`/directors`}>
          <span className="label">Director: </span>
+        </Link>
         <Link className="linkButton" to={`/directors/${movie.Director.Name}`}>
          <span className="value">{movie.Director.Name}</span>
          </Link>

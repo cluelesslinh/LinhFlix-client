@@ -12,7 +12,7 @@ export class GenreView extends React.Component {
     return (
       <Row className="genre-view justify-content-md-center">
         <Col md={8} className="genre-poster rowGap">
-          <img class="genreImage" src={genre.ImagePath} />
+          <img className="genreImage" src={genre.ImagePath} />
         </Col>
         <Col md={8} className="genre-title rowGap">
           <span className="label">Genre: </span>
@@ -23,7 +23,7 @@ export class GenreView extends React.Component {
           <span className="value">{genre.Description}</span>
         </Col>
         <Col md={8}>
-        <button class="buttonBottom" onClick={() => { onBackClick(null); }}>Back</button>
+        <button className="buttonBottom" onClick={() => { onBackClick(null); }}>Back</button>
         </Col>
       </Row>
     );

@@ -59,6 +59,10 @@ Form {
   margin-top: 1em;
 }
 
+.director-list {
+  text-align: center;
+  color: #ffffff;
+}
 body {
   background-size: cover;
   background-attachment: fixed;
