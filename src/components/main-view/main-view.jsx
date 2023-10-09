@@ -115,7 +115,7 @@ class MainView extends React.Component {
             expand="lg"
             className="navbar mb-5 bg-dk"
           >
-            <Navbar.Brand href="https://linhflixdb.cyclic.cloud/" className="navbar-brand">
+            <Navbar.Brand href="https://linhflixdb.netlify.app/" className="navbar-brand">
               LinhFlix
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
