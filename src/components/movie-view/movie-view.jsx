@@ -11,7 +11,7 @@ export class MovieView extends React.Component {
   handleAdd() {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
-    axios.post(`https://myflixcl.herokuapp.com/users/${user}` + "/movies/" +
+    axios.post(`https://linhflixdb.cyclic.cloud//users/${user}` + "/movies/" +
       this.props.movie._id, {},
       { headers: { Authorization: `Bearer ${token}` } }
     )
@@ -38,24 +38,24 @@ export class MovieView extends React.Component {
           <span className="value">{movie.Description}</span>
         </Col>
         <Col md={8} className="movie-genre rowGap">
-        <Link className="linkButton" to={`/genres`}>
-         <span className="label">Genre: </span>
-       </Link>
-        <Link className="linkButton" to={`/genres/${movie.Genre.Name}`}>
-         <span className="value">{movie.Genre.Name}</span>
-        </Link>
-      </Col>
+          <Link className="linkButton" to={`/genres`}>
+            <span className="label">Genre: </span>
+          </Link>
+          <Link className="linkButton" to={`/genres/${movie.Genre.Name}`}>
+            <span className="value">{movie.Genre.Name}</span>
+          </Link>
+        </Col>
         <Col md={8} className="movie-director rowGap">
-        <Link className="linkButton" to={`/directors`}>
-         <span className="label">Director: </span>
-        </Link>
-        <Link className="linkButton" to={`/directors/${movie.Director.Name}`}>
-         <span className="value">{movie.Director.Name}</span>
-         </Link>
-       </Col>
-       <Col md={8}>
-        <button className="buttonBottom" onClick={() => { onBackClick(null); }}>Back</button>
-        <button className="buttonBottom" onClick={() => this.handleAdd(movie)}>Add to favorite</button>
+          <Link className="linkButton" to={`/directors`}>
+            <span className="label">Director: </span>
+          </Link>
+          <Link className="linkButton" to={`/directors/${movie.Director.Name}`}>
+            <span className="value">{movie.Director.Name}</span>
+          </Link>
+        </Col>
+        <Col md={8}>
+          <button className="buttonBottom" onClick={() => { onBackClick(null); }}>Back</button>
+          <button className="buttonBottom" onClick={() => this.handleAdd(movie)}>Add to favorite</button>
         </Col>
       </Row>
     );
