@@ -12,7 +12,7 @@ export class MovieCard extends React.Component {
   handleAdd() {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
-    axios.post(`https://myflixcl.herokuapp.com/users/${user}` + "/movies/" +
+    axios.post(`https://linhflixdb.cyclic.cloud/users/${user}` + "/movies/" +
       this.props.movie._id, {},
       { headers: { Authorization: `Bearer ${token}` } }
     )
@@ -27,24 +27,24 @@ export class MovieCard extends React.Component {
 
     return (
       <div className="movieCard">
-      <Card>
-        <Link to={`/movies/${movie._id}`}>
-        <Card.Img variant="top" src={movie.ImagePath}/>
-        </Link>
-        <Card.Body>
+        <Card>
           <Link to={`/movies/${movie._id}`}>
-            <Button variant="link">Open</Button>
+            <Card.Img variant="top" src={movie.ImagePath} />
           </Link>
+          <Card.Body>
+            <Link to={`/movies/${movie._id}`}>
+              <Button variant="link">Open</Button>
+            </Link>
             <Button onClick={() => this.handleAdd(movie)}>Add to favorite</Button>
-        </Card.Body>
-      </Card>
-    </div>
+          </Card.Body>
+        </Card>
+      </div>
     );
   }
 }
 
 let mapStateToProps = state => {
-  return {movies: state.movies, user: state.user }
+  return { movies: state.movies, user: state.user }
 }
 
-export default connect(mapStateToProps, {setUser})(MovieCard);
+export default connect(mapStateToProps, { setUser })(MovieCard);

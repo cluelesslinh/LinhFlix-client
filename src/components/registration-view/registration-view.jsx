@@ -24,7 +24,7 @@ export function RegistrationView() {
     e.preventDefault();
     let setisValid = formValidation();
     if (setisValid) {
-      axios.post('https://myflixcl.herokuapp.com/users', {
+      axios.post('https://linhflixdb.cyclic.cloud/users', {
         Username: username,
         Password: password,
         ConfirmPassword: confirmPassword,

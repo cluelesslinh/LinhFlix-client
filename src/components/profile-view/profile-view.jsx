@@ -22,7 +22,7 @@ export class ProfileView extends React.Component {
 
   removeFavorite(movie) {
     const token = localStorage.getItem("token");
-    const url = "https://myflixcl.herokuapp.com/users/" + localStorage.getItem("user") + "/movies/" + movie._id;
+    const url = "https://linhflixdb.cyclic.cloud/users/" + localStorage.getItem("user") + "/movies/" + movie._id;
     axios
       .delete(url, {
         headers: { Authorization: `Bearer ${token}` },
@@ -38,7 +38,7 @@ export class ProfileView extends React.Component {
     const user = localStorage.getItem("user");
     axios
       .delete(
-        `https://myflixcl.herokuapp.com/users/${user}`,
+        `https://linhflixdb.cyclic.cloud/users/${user}`,
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then(() => {
@@ -61,29 +61,31 @@ export class ProfileView extends React.Component {
     const email = e.target[2].value;
     const birthdate = e.target[3].value;
     let token = localStorage.getItem("token");
-      let setisValid = this.formValidation(username, password, email, birthdate);
-      if (setisValid) {
-        axios.put(`https://myflixcl.herokuapp.com/users/${localStorage.getItem("user")}`,
-         { Username: username || user.Username,
-           Password: password || undefined,
-           Email: email || user.Email,
-           Birthdate: birthdate || user.Birthdate },
-           {headers: { Authorization: `Bearer ${token}`}}
-         )
-          .then((response) => {
-            this.props.setUser(response.data)
-            localStorage.setItem("user", response.data.Username)
-            alert(user.Username + " has been updated.");
-            console.log(response);
-          })
-          .catch(function (error) {
-            alert("Something went wrong...")
-            console.log(error.response.data);
-          });
-      }
+    let setisValid = this.formValidation(username, password, email, birthdate);
+    if (setisValid) {
+      axios.put(`https://linhflixdb.cyclic.cloud/users/${localStorage.getItem("user")}`,
+        {
+          Username: username || user.Username,
+          Password: password || undefined,
+          Email: email || user.Email,
+          Birthdate: birthdate || user.Birthdate
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+        .then((response) => {
+          this.props.setUser(response.data)
+          localStorage.setItem("user", response.data.Username)
+          alert(user.Username + " has been updated.");
+          console.log(response);
+        })
+        .catch(function (error) {
+          alert("Something went wrong...")
+          console.log(error.response.data);
+        });
     }
+  }
 
-  formValidation( username, password, email, birthdate ) {
+  formValidation(username, password, email, birthdate) {
     let UsernameError = {};
     let EmailError = {};
     let PasswordError = {};
@@ -202,13 +204,13 @@ export class ProfileView extends React.Component {
 
                 </Form.Group>
 
-                  <Button className="mb-2" variant="dark"
-                    type="submit"
-                    size="md"
-                    block
-                  >
-                    Save changes
-                    </Button>
+                <Button className="mb-2" variant="dark"
+                  type="submit"
+                  size="md"
+                  block
+                >
+                  Save changes
+                </Button>
 
                 <Link to={`/`}>
                   <Button className="mb-2"
@@ -245,13 +247,13 @@ export class ProfileView extends React.Component {
                         <div key={movie._id}>
                           <Card className="movieCard">
                             <Link to={`/movies/${movie._id}`}>
-                            <Card.Img variant="top" src={movie.ImagePath}/>
+                              <Card.Img variant="top" src={movie.ImagePath} />
                             </Link>
                             <Card.Body>
                               <Link to={`/movies/${movie._id}`}>
                                 <Button variant="link">Open</Button>
                               </Link>
-                                <Button onClick={() => this.removeFavorite(movie)}>Remove</Button>
+                              <Button onClick={() => this.removeFavorite(movie)}>Remove</Button>
                             </Card.Body>
                           </Card>
                         </div>
