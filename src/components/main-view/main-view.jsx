@@ -112,7 +112,6 @@ class MainView extends React.Component {
             expand="lg"
             sticky="top"
             variant="dark"
-            expand="lg"
             className="navbar mb-5 bg-dk"
           >
             <Navbar.Brand href="https://linhflixdb.netlify.app/" className="navbar-brand">
