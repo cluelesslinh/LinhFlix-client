@@ -26,8 +26,8 @@ export class MovieView extends React.Component {
 
     return (
       <Row className="movie-view justify-content-md-center">
-        <Col md={8} className="movie-poster rowGap">
-          <img src={movie.ImagePath} />
+        <Col md={14} className="movie-poster rowGap">
+          <img height="450px" src={movie.ImagePath} />
         </Col>
         <Col md={8} className="movie-title rowGap">
           <span className="label">Title: </span>

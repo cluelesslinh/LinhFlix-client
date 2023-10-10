@@ -2,6 +2,12 @@
   margin-bottom: 2em;
 }
 
+.movieImg {
+  height: 25wwvh;
+  object-fit: cover;
+  max-width: 100%;
+}
+
 .movie-view {
   text-align: center;
   color: #fff;

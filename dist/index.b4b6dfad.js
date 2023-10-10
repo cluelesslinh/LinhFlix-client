@@ -2977,7 +2977,7 @@ class MyFlixApplication extends (0, _reactDefault.default).Component {
         }, void 0, false, {
             fileName: "src/index.jsx",
             lineNumber: 20,
-            columnNumber: 6
+            columnNumber: 7
         }, this);
     }
 }
@@ -32361,6 +32361,7 @@ class MovieCard extends (0, _reactDefault.default).Component {
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
                         to: `/movies/${movie._id}`,
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Img, {
+                            className: "movieImg",
                             variant: "top",
                             src: movie.ImagePath
                         }, void 0, false, {
@@ -34668,9 +34669,10 @@ class MovieView extends (0, _reactDefault.default).Component {
             className: "movie-view justify-content-md-center",
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
-                    md: 8,
+                    md: 14,
                     className: "movie-poster rowGap",
                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                        height: "450px",
                         src: movie.ImagePath
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
