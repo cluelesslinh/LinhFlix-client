@@ -3,9 +3,9 @@
 }
 
 .movieImg {
-  height: 25wwvh;
   object-fit: cover;
   max-width: 100%;
+  height: 25vh;
 }
 
 .movie-view {
