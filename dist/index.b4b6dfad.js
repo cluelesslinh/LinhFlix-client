@@ -27418,7 +27418,7 @@ class MainView extends (0, _reactDefault.default).Component {
         });
     }
     getGenres(token) {
-        (0, _axiosDefault.default).get("https://linhflixdb.cyclic.cloud/genres", {
+        (0, _axiosDefault.default).get("https://linhflixdb.cyclic.app/genres", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -27431,7 +27431,7 @@ class MainView extends (0, _reactDefault.default).Component {
         });
     }
     getDirectors(token) {
-        (0, _axiosDefault.default).get("https://linhflixdb.cyclic.cloud/directors", {
+        (0, _axiosDefault.default).get("https://linhflixdb.cyclic.app/directors", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -27854,7 +27854,7 @@ module.exports.default = axios;
 },{"1137fef34918bf53":"5By4s","ce63a8247a300202":"haRQb","c14c66f4c3ec48a2":"cpqD8","345f9ec0ee8efc80":"b85oP","27bdb15d131780c5":"lTJJ4","ae1da7645e57ebca":"kjMy2","853fec7db7d524b4":"45wzn","322a636c3e2325e1":"a0VmF","75c7c70e55d88256":"dyQ8N","543a1da09311ae9b":"eyiLq"}],"5By4s":[function(require,module,exports) {
 "use strict";
 var bind = require("a7c7b4094caa86ac");
-/*global toString:true*/ // utils is a library of generic helper functions non-specific to axios
+// utils is a library of generic helper functions non-specific to axios
 var toString = Object.prototype.toString;
 /**
  * Determine if a value is an Array
@@ -27995,7 +27995,7 @@ var toString = Object.prototype.toString;
  * @param {String} str The String to trim
  * @returns {String} The String freed of excess whitespace
  */ function trim(str) {
-    return str.replace(/^\s*/, "").replace(/\s*$/, "");
+    return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, "");
 }
 /**
  * Determine if we're running in a standard browser environment
@@ -28132,6 +28132,8 @@ var buildURL = require("945ebba9256ed84f");
 var InterceptorManager = require("fc2d71ae77ba798e");
 var dispatchRequest = require("77b4f57f4d663a9b");
 var mergeConfig = require("5db81a4f62f8927d");
+var validator = require("d0f5147a00cee7c5");
+var validators = validator.validators;
 /**
  * Create a new instance of Axios
  *
@@ -28158,19 +28160,53 @@ var mergeConfig = require("5db81a4f62f8927d");
     if (config.method) config.method = config.method.toLowerCase();
     else if (this.defaults.method) config.method = this.defaults.method.toLowerCase();
     else config.method = "get";
-    // Hook up interceptors middleware
-    var chain = [
-        dispatchRequest,
-        undefined
-    ];
-    var promise = Promise.resolve(config);
+    var transitional = config.transitional;
+    if (transitional !== undefined) validator.assertOptions(transitional, {
+        silentJSONParsing: validators.transitional(validators.boolean, "1.0.0"),
+        forcedJSONParsing: validators.transitional(validators.boolean, "1.0.0"),
+        clarifyTimeoutError: validators.transitional(validators.boolean, "1.0.0")
+    }, false);
+    // filter out skipped interceptors
+    var requestInterceptorChain = [];
+    var synchronousRequestInterceptors = true;
     this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
-        chain.unshift(interceptor.fulfilled, interceptor.rejected);
+        if (typeof interceptor.runWhen === "function" && interceptor.runWhen(config) === false) return;
+        synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;
+        requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
     });
+    var responseInterceptorChain = [];
     this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
-        chain.push(interceptor.fulfilled, interceptor.rejected);
+        responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
     });
-    while(chain.length)promise = promise.then(chain.shift(), chain.shift());
+    var promise;
+    if (!synchronousRequestInterceptors) {
+        var chain = [
+            dispatchRequest,
+            undefined
+        ];
+        Array.prototype.unshift.apply(chain, requestInterceptorChain);
+        chain = chain.concat(responseInterceptorChain);
+        promise = Promise.resolve(config);
+        while(chain.length)promise = promise.then(chain.shift(), chain.shift());
+        return promise;
+    }
+    var newConfig = config;
+    while(requestInterceptorChain.length){
+        var onFulfilled = requestInterceptorChain.shift();
+        var onRejected = requestInterceptorChain.shift();
+        try {
+            newConfig = onFulfilled(newConfig);
+        } catch (error) {
+            onRejected(error);
+            break;
+        }
+    }
+    try {
+        promise = dispatchRequest(newConfig);
+    } catch (error) {
+        return Promise.reject(error);
+    }
+    while(responseInterceptorChain.length)promise = promise.then(responseInterceptorChain.shift(), responseInterceptorChain.shift());
     return promise;
 };
 Axios.prototype.getUri = function getUri(config) {
@@ -28207,7 +28243,7 @@ utils.forEach([
 });
 module.exports = Axios;
 
-},{"2cd2d0baba832579":"5By4s","945ebba9256ed84f":"3bwC2","fc2d71ae77ba798e":"1VRIM","77b4f57f4d663a9b":"6sjJ6","5db81a4f62f8927d":"b85oP"}],"3bwC2":[function(require,module,exports) {
+},{"2cd2d0baba832579":"5By4s","945ebba9256ed84f":"3bwC2","fc2d71ae77ba798e":"1VRIM","77b4f57f4d663a9b":"6sjJ6","5db81a4f62f8927d":"b85oP","d0f5147a00cee7c5":"9vgkY"}],"3bwC2":[function(require,module,exports) {
 "use strict";
 var utils = require("d198994ea2a45305");
 function encode(val) {
@@ -28261,10 +28297,12 @@ function InterceptorManager() {
  * @param {Function} rejected The function to handle `reject` for a `Promise`
  *
  * @return {Number} An ID used to remove interceptor later
- */ InterceptorManager.prototype.use = function use(fulfilled, rejected) {
+ */ InterceptorManager.prototype.use = function use(fulfilled, rejected, options) {
     this.handlers.push({
         fulfilled: fulfilled,
-        rejected: rejected
+        rejected: rejected,
+        synchronous: options ? options.synchronous : false,
+        runWhen: options ? options.runWhen : null
     });
     return this.handlers.length - 1;
 };
@@ -28310,7 +28348,7 @@ var defaults = require("293260d2186f65fb");
     // Ensure headers exist
     config.headers = config.headers || {};
     // Transform request data
-    config.data = transformData(config.data, config.headers, config.transformRequest);
+    config.data = transformData.call(config, config.data, config.headers, config.transformRequest);
     // Flatten headers
     config.headers = utils.merge(config.headers.common || {}, config.headers[config.method] || {}, config.headers);
     utils.forEach([
@@ -28328,13 +28366,13 @@ var defaults = require("293260d2186f65fb");
     return adapter(config).then(function onAdapterResolution(response) {
         throwIfCancellationRequested(config);
         // Transform response data
-        response.data = transformData(response.data, response.headers, config.transformResponse);
+        response.data = transformData.call(config, response.data, response.headers, config.transformResponse);
         return response;
     }, function onAdapterRejection(reason) {
         if (!isCancel(reason)) {
             throwIfCancellationRequested(config);
             // Transform response data
-            if (reason && reason.response) reason.response.data = transformData(reason.response.data, reason.response.headers, config.transformResponse);
+            if (reason && reason.response) reason.response.data = transformData.call(config, reason.response.data, reason.response.headers, config.transformResponse);
         }
         return Promise.reject(reason);
     });
@@ -28343,6 +28381,7 @@ var defaults = require("293260d2186f65fb");
 },{"dccb83262660ba2a":"5By4s","670a836c9c5a1abe":"eRqJY","9b938a75c8452b2f":"a0VmF","293260d2186f65fb":"lTJJ4"}],"eRqJY":[function(require,module,exports) {
 "use strict";
 var utils = require("506225f7f22ee5b3");
+var defaults = require("5f8f7bd977372ccb");
 /**
  * Transform the data for a request or a response
  *
@@ -28351,23 +28390,19 @@ var utils = require("506225f7f22ee5b3");
  * @param {Array|Function} fns A single function or Array of functions
  * @returns {*} The resulting transformed data
  */ module.exports = function transformData(data, headers, fns) {
+    var context = this || defaults;
     /*eslint no-param-reassign:0*/ utils.forEach(fns, function transform(fn) {
-        data = fn(data, headers);
+        data = fn.call(context, data, headers);
     });
     return data;
 };
 
-},{"506225f7f22ee5b3":"5By4s"}],"a0VmF":[function(require,module,exports) {
-"use strict";
-module.exports = function isCancel(value) {
-    return !!(value && value.__CANCEL__);
-};
-
-},{}],"lTJJ4":[function(require,module,exports) {
+},{"506225f7f22ee5b3":"5By4s","5f8f7bd977372ccb":"lTJJ4"}],"lTJJ4":[function(require,module,exports) {
 var process = require("1ad3e53325021694");
 "use strict";
 var utils = require("46f17d5a961ed1b0");
 var normalizeHeaderName = require("cc6d63c7870abf00");
+var enhanceError = require("381f0945c152ddd3");
 var DEFAULT_CONTENT_TYPE = {
     "Content-Type": "application/x-www-form-urlencoded"
 };
@@ -28382,7 +28417,21 @@ function getDefaultAdapter() {
     adapter = require("1a73616b0da0ef06");
     return adapter;
 }
+function stringifySafely(rawValue, parser, encoder) {
+    if (utils.isString(rawValue)) try {
+        (parser || JSON.parse)(rawValue);
+        return utils.trim(rawValue);
+    } catch (e) {
+        if (e.name !== "SyntaxError") throw e;
+    }
+    return (encoder || JSON.stringify)(rawValue);
+}
 var defaults = {
+    transitional: {
+        silentJSONParsing: true,
+        forcedJSONParsing: true,
+        clarifyTimeoutError: false
+    },
     adapter: getDefaultAdapter(),
     transformRequest: [
         function transformRequest(data, headers) {
@@ -28394,18 +28443,27 @@ var defaults = {
                 setContentTypeIfUnset(headers, "application/x-www-form-urlencoded;charset=utf-8");
                 return data.toString();
             }
-            if (utils.isObject(data)) {
-                setContentTypeIfUnset(headers, "application/json;charset=utf-8");
-                return JSON.stringify(data);
+            if (utils.isObject(data) || headers && headers["Content-Type"] === "application/json") {
+                setContentTypeIfUnset(headers, "application/json");
+                return stringifySafely(data);
             }
             return data;
         }
     ],
     transformResponse: [
         function transformResponse(data) {
-            /*eslint no-param-reassign:0*/ if (typeof data === "string") try {
-                data = JSON.parse(data);
-            } catch (e) {}
+            var transitional = this.transitional;
+            var silentJSONParsing = transitional && transitional.silentJSONParsing;
+            var forcedJSONParsing = transitional && transitional.forcedJSONParsing;
+            var strictJSONParsing = !silentJSONParsing && this.responseType === "json";
+            if (strictJSONParsing || forcedJSONParsing && utils.isString(data) && data.length) try {
+                return JSON.parse(data);
+            } catch (e) {
+                if (strictJSONParsing) {
+                    if (e.name === "SyntaxError") throw enhanceError(e, this, "E_JSON_PARSE");
+                    throw e;
+                }
+            }
             return data;
         }
     ],
@@ -28442,7 +28500,7 @@ utils.forEach([
 });
 module.exports = defaults;
 
-},{"1ad3e53325021694":"d5jf4","46f17d5a961ed1b0":"5By4s","cc6d63c7870abf00":"adBZo","f5547462a34fd4c6":"ldm57","1a73616b0da0ef06":"ldm57"}],"adBZo":[function(require,module,exports) {
+},{"1ad3e53325021694":"d5jf4","46f17d5a961ed1b0":"5By4s","cc6d63c7870abf00":"adBZo","381f0945c152ddd3":"itUQr","f5547462a34fd4c6":"ldm57","1a73616b0da0ef06":"ldm57"}],"adBZo":[function(require,module,exports) {
 "use strict";
 var utils = require("5f8afca0889a63e1");
 module.exports = function normalizeHeaderName(headers, normalizedName) {
@@ -28454,7 +28512,45 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
     });
 };
 
-},{"5f8afca0889a63e1":"5By4s"}],"ldm57":[function(require,module,exports) {
+},{"5f8afca0889a63e1":"5By4s"}],"itUQr":[function(require,module,exports) {
+"use strict";
+/**
+ * Update an Error with the specified config, error code, and response.
+ *
+ * @param {Error} error The error to update.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The error.
+ */ module.exports = function enhanceError(error, config, code, request, response) {
+    error.config = config;
+    if (code) error.code = code;
+    error.request = request;
+    error.response = response;
+    error.isAxiosError = true;
+    error.toJSON = function toJSON() {
+        return {
+            // Standard
+            message: this.message,
+            name: this.name,
+            // Microsoft
+            description: this.description,
+            number: this.number,
+            // Mozilla
+            fileName: this.fileName,
+            lineNumber: this.lineNumber,
+            columnNumber: this.columnNumber,
+            stack: this.stack,
+            // Axios
+            config: this.config,
+            code: this.code
+        };
+    };
+    return error;
+};
+
+},{}],"ldm57":[function(require,module,exports) {
 "use strict";
 var utils = require("2bb8b5f6db10dd6d");
 var settle = require("a7b983c12bb9f77f");
@@ -28468,6 +28564,7 @@ module.exports = function xhrAdapter(config) {
     return new Promise(function dispatchXhrRequest(resolve, reject) {
         var requestData = config.data;
         var requestHeaders = config.headers;
+        var responseType = config.responseType;
         if (utils.isFormData(requestData)) delete requestHeaders["Content-Type"]; // Let the browser set it
         var request = new XMLHttpRequest();
         // HTTP basic authentication
@@ -28480,17 +28577,11 @@ module.exports = function xhrAdapter(config) {
         request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true);
         // Set the request timeout in MS
         request.timeout = config.timeout;
-        // Listen for ready state
-        request.onreadystatechange = function handleLoad() {
-            if (!request || request.readyState !== 4) return;
-            // The request errored out and we didn't get a response, this will be
-            // handled by onerror instead
-            // With one exception: request that using file: protocol, most browsers
-            // will return status as 0 even though it's a successful request
-            if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf("file:") === 0)) return;
+        function onloadend() {
+            if (!request) return;
             // Prepare the response
             var responseHeaders = "getAllResponseHeaders" in request ? parseHeaders(request.getAllResponseHeaders()) : null;
-            var responseData = !config.responseType || config.responseType === "text" ? request.responseText : request.response;
+            var responseData = !responseType || responseType === "text" || responseType === "json" ? request.responseText : request.response;
             var response = {
                 data: responseData,
                 status: request.status,
@@ -28502,6 +28593,20 @@ module.exports = function xhrAdapter(config) {
             settle(resolve, reject, response);
             // Clean up request
             request = null;
+        }
+        if ("onloadend" in request) // Use onloadend if available
+        request.onloadend = onloadend;
+        else // Listen for ready state to emulate onloadend
+        request.onreadystatechange = function handleLoad() {
+            if (!request || request.readyState !== 4) return;
+            // The request errored out and we didn't get a response, this will be
+            // handled by onerror instead
+            // With one exception: request that using file: protocol, most browsers
+            // will return status as 0 even though it's a successful request
+            if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf("file:") === 0)) return;
+            // readystate handler is calling before onerror or ontimeout handlers,
+            // so we should call onloadend on the next 'tick'
+            setTimeout(onloadend);
         };
         // Handle browser request cancellation (as opposed to a manual cancellation)
         request.onabort = function handleAbort() {
@@ -28522,7 +28627,7 @@ module.exports = function xhrAdapter(config) {
         request.ontimeout = function handleTimeout() {
             var timeoutErrorMessage = "timeout of " + config.timeout + "ms exceeded";
             if (config.timeoutErrorMessage) timeoutErrorMessage = config.timeoutErrorMessage;
-            reject(createError(timeoutErrorMessage, config, "ECONNABORTED", request));
+            reject(createError(timeoutErrorMessage, config, config.transitional && config.transitional.clarifyTimeoutError ? "ETIMEDOUT" : "ECONNABORTED", request));
             // Clean up request
             request = null;
         };
@@ -28544,13 +28649,7 @@ module.exports = function xhrAdapter(config) {
         // Add withCredentials to request if needed
         if (!utils.isUndefined(config.withCredentials)) request.withCredentials = !!config.withCredentials;
         // Add responseType to request if needed
-        if (config.responseType) try {
-            request.responseType = config.responseType;
-        } catch (e) {
-            // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
-            // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
-            if (config.responseType !== "json") throw e;
-        }
+        if (responseType && responseType !== "json") request.responseType = config.responseType;
         // Handle progress if needed
         if (typeof config.onDownloadProgress === "function") request.addEventListener("progress", config.onDownloadProgress);
         // Not all browsers support upload events
@@ -28601,45 +28700,7 @@ var enhanceError = require("ff529806947600d1");
     return enhanceError(error, config, code, request, response);
 };
 
-},{"ff529806947600d1":"itUQr"}],"itUQr":[function(require,module,exports) {
-"use strict";
-/**
- * Update an Error with the specified config, error code, and response.
- *
- * @param {Error} error The error to update.
- * @param {Object} config The config.
- * @param {string} [code] The error code (for example, 'ECONNABORTED').
- * @param {Object} [request] The request.
- * @param {Object} [response] The response.
- * @returns {Error} The error.
- */ module.exports = function enhanceError(error, config, code, request, response) {
-    error.config = config;
-    if (code) error.code = code;
-    error.request = request;
-    error.response = response;
-    error.isAxiosError = true;
-    error.toJSON = function toJSON() {
-        return {
-            // Standard
-            message: this.message,
-            name: this.name,
-            // Microsoft
-            description: this.description,
-            number: this.number,
-            // Mozilla
-            fileName: this.fileName,
-            lineNumber: this.lineNumber,
-            columnNumber: this.columnNumber,
-            stack: this.stack,
-            // Axios
-            config: this.config,
-            code: this.code
-        };
-    };
-    return error;
-};
-
-},{}],"4WJjt":[function(require,module,exports) {
+},{"ff529806947600d1":"itUQr"}],"4WJjt":[function(require,module,exports) {
 "use strict";
 var utils = require("c987331427b8b2ad");
 module.exports = utils.isStandardBrowserEnv() ? // Standard browser envs support document.cookie
@@ -28824,7 +28885,13 @@ function nonStandardBrowserEnv() {
     };
 }();
 
-},{"c8f79893fd676b4c":"5By4s"}],"b85oP":[function(require,module,exports) {
+},{"c8f79893fd676b4c":"5By4s"}],"a0VmF":[function(require,module,exports) {
+"use strict";
+module.exports = function isCancel(value) {
+    return !!(value && value.__CANCEL__);
+};
+
+},{}],"b85oP":[function(require,module,exports) {
 "use strict";
 var utils = require("99adbff39af8f677");
 /**
@@ -28907,7 +28974,92 @@ var utils = require("99adbff39af8f677");
     return config;
 };
 
-},{"99adbff39af8f677":"5By4s"}],"kjMy2":[function(require,module,exports) {
+},{"99adbff39af8f677":"5By4s"}],"9vgkY":[function(require,module,exports) {
+"use strict";
+var pkg = require("3c22590bc411b699");
+var validators = {};
+// eslint-disable-next-line func-names
+[
+    "object",
+    "boolean",
+    "number",
+    "function",
+    "string",
+    "symbol"
+].forEach(function(type, i) {
+    validators[type] = function validator(thing) {
+        return typeof thing === type || "a" + (i < 1 ? "n " : " ") + type;
+    };
+});
+var deprecatedWarnings = {};
+var currentVerArr = pkg.version.split(".");
+/**
+ * Compare package versions
+ * @param {string} version
+ * @param {string?} thanVersion
+ * @returns {boolean}
+ */ function isOlderVersion(version, thanVersion) {
+    var pkgVersionArr = thanVersion ? thanVersion.split(".") : currentVerArr;
+    var destVer = version.split(".");
+    for(var i = 0; i < 3; i++){
+        if (pkgVersionArr[i] > destVer[i]) return true;
+        else if (pkgVersionArr[i] < destVer[i]) return false;
+    }
+    return false;
+}
+/**
+ * Transitional option validator
+ * @param {function|boolean?} validator
+ * @param {string?} version
+ * @param {string} message
+ * @returns {function}
+ */ validators.transitional = function transitional(validator, version, message) {
+    var isDeprecated = version && isOlderVersion(version);
+    function formatMessage(opt, desc) {
+        return "[Axios v" + pkg.version + "] Transitional option '" + opt + "'" + desc + (message ? ". " + message : "");
+    }
+    // eslint-disable-next-line func-names
+    return function(value, opt, opts) {
+        if (validator === false) throw new Error(formatMessage(opt, " has been removed in " + version));
+        if (isDeprecated && !deprecatedWarnings[opt]) {
+            deprecatedWarnings[opt] = true;
+            // eslint-disable-next-line no-console
+            console.warn(formatMessage(opt, " has been deprecated since v" + version + " and will be removed in the near future"));
+        }
+        return validator ? validator(value, opt, opts) : true;
+    };
+};
+/**
+ * Assert object's properties type
+ * @param {object} options
+ * @param {object} schema
+ * @param {boolean?} allowUnknown
+ */ function assertOptions(options, schema, allowUnknown) {
+    if (typeof options !== "object") throw new TypeError("options must be an object");
+    var keys = Object.keys(options);
+    var i = keys.length;
+    while(i-- > 0){
+        var opt = keys[i];
+        var validator = schema[opt];
+        if (validator) {
+            var value = options[opt];
+            var result = value === undefined || validator(value, opt, options);
+            if (result !== true) throw new TypeError("option " + opt + " must be " + result);
+            continue;
+        }
+        if (allowUnknown !== true) throw Error("Unknown option " + opt);
+    }
+}
+module.exports = {
+    isOlderVersion: isOlderVersion,
+    assertOptions: assertOptions,
+    validators: validators
+};
+
+},{"3c22590bc411b699":"8o6oT"}],"8o6oT":[function(require,module,exports) {
+module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
+
+},{}],"kjMy2":[function(require,module,exports) {
 "use strict";
 /**
  * A `Cancel` is an object that is thrown when an operation is canceled.
@@ -35635,7 +35787,7 @@ class GenreView extends (0, _reactDefault.default).Component {
                     }, void 0, false, {
                         fileName: "src/components/genre-view/genre-view.jsx",
                         lineNumber: 26,
-                        columnNumber: 9
+                        columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "src/components/genre-view/genre-view.jsx",

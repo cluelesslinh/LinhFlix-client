@@ -61,7 +61,7 @@ class MainView extends React.Component {
   }
 
   getGenres(token) {
-    axios.get('https://linhflixdb.cyclic.cloud/genres', {
+    axios.get('https://linhflixdb.cyclic.app/genres', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
@@ -75,7 +75,7 @@ class MainView extends React.Component {
   }
 
   getDirectors(token) {
-    axios.get('https://linhflixdb.cyclic.cloud/directors', {
+    axios.get('https://linhflixdb.cyclic.app/directors', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
