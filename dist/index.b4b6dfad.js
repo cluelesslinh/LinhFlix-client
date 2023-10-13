@@ -27396,7 +27396,7 @@ class MainView extends (0, _reactDefault.default).Component {
         }
     }
     getUser(token, Username) {
-        (0, _axiosDefault.default).get(`https://linhflixdb.cyclic.cloud/users/${Username}`, {
+        (0, _axiosDefault.default).get(`https://linhflixdb.cyclic.app/users/${Username}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -27407,7 +27407,7 @@ class MainView extends (0, _reactDefault.default).Component {
         });
     }
     getMovies(token) {
-        (0, _axiosDefault.default).get("https://linhflixdb.cyclic.cloud/movies", {
+        (0, _axiosDefault.default).get("https://linhflixdb.cyclic.app/movies", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -32343,7 +32343,7 @@ class MovieCard extends (0, _reactDefault.default).Component {
     handleAdd() {
         const token = localStorage.getItem("token");
         const user = localStorage.getItem("user");
-        (0, _axiosDefault.default).post(`https://linhflixdb.cyclic.cloud/users/${user}` + "/movies/" + this.props.movie._id, {}, {
+        (0, _axiosDefault.default).post(`https://linhflixdb.cyclic.app/users/${user}` + "/movies/" + this.props.movie._id, {}, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -34654,7 +34654,7 @@ class MovieView extends (0, _reactDefault.default).Component {
     handleAdd() {
         const token = localStorage.getItem("token");
         const user = localStorage.getItem("user");
-        (0, _axiosDefault.default).post(`https://linhflixdb.cyclic.cloud//users/${user}` + "/movies/" + this.props.movie._id, {}, {
+        (0, _axiosDefault.default).post(`https://linhflixdb.cyclic.app/users/${user}` + "/movies/" + this.props.movie._id, {}, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -34888,7 +34888,7 @@ function LoginView(props) {
     const [password, setPassword] = (0, _react.useState)("");
     const handleSubmit = (e)=>{
         e.preventDefault();
-        (0, _axiosDefault.default).post("https://linhflixdb.cyclic.cloud/login", {
+        (0, _axiosDefault.default).post("https://linhflixdb.cyclic.app/login", {
             Username: username,
             Password: password
         }).then((response)=>{
@@ -35071,7 +35071,7 @@ function RegistrationView() {
         e.preventDefault();
         let setisValid = formValidation();
         if (setisValid) {
-            (0, _axiosDefault.default).post("https://linhflixdb.cyclic.cloud/users", {
+            (0, _axiosDefault.default).post("https://linhflixdb.cyclic.app/users", {
                 Username: username,
                 Password: password,
                 ConfirmPassword: confirmPassword,
@@ -35884,7 +35884,7 @@ class ProfileView extends (0, _reactDefault.default).Component {
     }
     removeFavorite(movie) {
         const token = localStorage.getItem("token");
-        const url = "https://linhflixdb.cyclic.cloud/users/" + localStorage.getItem("user") + "/movies/" + movie._id;
+        const url = "https://linhflixdb.cyclic.app/users/" + localStorage.getItem("user") + "/movies/" + movie._id;
         (0, _axiosDefault.default).delete(url, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -35897,7 +35897,7 @@ class ProfileView extends (0, _reactDefault.default).Component {
     handleDelete() {
         const token = localStorage.getItem("token");
         const user = localStorage.getItem("user");
-        (0, _axiosDefault.default).delete(`https://linhflixdb.cyclic.cloud/users/${user}`, {
+        (0, _axiosDefault.default).delete(`https://linhflixdb.cyclic.app/users/${user}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -35920,7 +35920,7 @@ class ProfileView extends (0, _reactDefault.default).Component {
         const birthdate = e.target[3].value;
         let token = localStorage.getItem("token");
         let setisValid = this.formValidation(username, password, email, birthdate);
-        if (setisValid) (0, _axiosDefault.default).put(`https://linhflixdb.cyclic.cloud/users/${localStorage.getItem("user")}`, {
+        if (setisValid) (0, _axiosDefault.default).put(`https://linhflixdb.cyclic.app/users/${localStorage.getItem("user")}`, {
             Username: username || user.Username,
             Password: password || undefined,
             Email: email || user.Email,

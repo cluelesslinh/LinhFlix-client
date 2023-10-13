@@ -37,7 +37,7 @@ class MainView extends React.Component {
   }
 
   getUser(token, Username) {
-    axios.get(`https://linhflixdb.cyclic.cloud/users/${Username}`, {
+    axios.get(`https://linhflixdb.cyclic.app/users/${Username}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
@@ -49,7 +49,7 @@ class MainView extends React.Component {
   }
 
   getMovies(token) {
-    axios.get('https://linhflixdb.cyclic.cloud/movies', {
+    axios.get('https://linhflixdb.cyclic.app/movies', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {

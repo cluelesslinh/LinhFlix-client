@@ -24,7 +24,7 @@ export function RegistrationView() {
     e.preventDefault();
     let setisValid = formValidation();
     if (setisValid) {
-      axios.post('https://linhflixdb.cyclic.cloud/users', {
+      axios.post('https://linhflixdb.cyclic.app/users', {
         Username: username,
         Password: password,
         ConfirmPassword: confirmPassword,

@@ -13,7 +13,7 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('https://linhflixdb.cyclic.cloud/login', {
+    axios.post('https://linhflixdb.cyclic.app/login', {
       Username: username,
       Password: password
     })
