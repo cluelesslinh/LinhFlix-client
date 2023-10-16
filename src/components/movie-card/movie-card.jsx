@@ -30,6 +30,7 @@ export class MovieCard extends React.Component {
         <Card>
           <Link to={`/movies/${movie._id}`}>
             <Card.Img className="movieImg" variant="top" src={movie.ImagePath} />
+            <span className="value">{movie.Title}</span>
           </Link>
           <Card.Body>
             <Link to={`/movies/${movie._id}`}>
