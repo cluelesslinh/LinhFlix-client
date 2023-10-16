@@ -53,79 +53,37 @@ export class ProfileView extends React.Component {
       });
   }
 
-  // handleUpdate(e) {
-  //   e.preventDefault();
-  //   const { user } = this.props;
-  //   const username = e.target[0].value;
-  //   const password = e.target[1].value;
-  //   const email = e.target[2].value;
-  //   const birthdate = e.target[3].value;
-  //   let token = localStorage.getItem("token");
-  //   let setisValid = this.formValidation(username, password, email, birthdate);
-  //   if (setisValid) {
-  //     axios.put(`https://linhflixdb.cyclic.app/users/${localStorage.getItem("user")}`,
-  //       {
-  //         Username: username || user.Username,
-  //         Password: password || undefined,
-  //         Email: email || user.Email,
-  //         Birthdate: birthdate || user.Birthdate
-  //       },
-  //       { headers: { Authorization: `Bearer ${token}` } }
-  //     )
-  //       .then((response) => {
-  //         this.props.setUser(response.data)
-  //         localStorage.setItem("user", response.data.Username)
-  //         alert(user.Username + " has been updated.");
-  //         console.log(response);
-  //       })
-  //       .catch(function (error) {
-  //         alert("Something went wrong...")
-  //         console.log(error.response.data);
-  //       });
-  //   }
-  // }
-
-  handleUpdate = (event) => {
-    event.preventDefault();
-
-    let data = {
-      username: username,
-      password: password,
-      email: email,
-      birthdate: birthdate,
-    };
-
-    //DEBUG
-    console.log(JSON.stringify(data));
-    console.log(username);
-
-    fetch(
-      `https://linhflixdb.cyclic.app/users/${user.username}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+  handleUpdate(e) {
+    e.preventDefault();
+    const { user } = this.props;
+    const username = e.target[0].value;
+    const password = e.target[1].value;
+    const email = e.target[2].value;
+    const birthdate = e.target[3].value;
+    let token = localStorage.getItem("token");
+    let setisValid = this.formValidation(username, password, email, birthdate);
+    if (setisValid) {
+      axios.put(`https://linhflixdb.cyclic.app/users/${localStorage.getItem("user")}`,
+        {
+          Username: username || user.Username,
+          Password: password || undefined,
+          Email: email || user.Email,
+          Birthdate: birthdate || user.Birthdate
         },
-        body: JSON.stringify(data),
-      }
-    )
-      .then(async (response) => {
-        console.log("response:", response);
-        if (response.ok) {
-          alert("update successful");
-          const data = await response.json();
-          localStorage.setItem("user", JSON.stringify(data));
-          window.location.reload();
-        } else {
-          const errorText = await response.text();
-          // Read the response body as text
-          console.log("Error response body:", errorText);
-          alert("update failed");
-        }
-      })
-      .catch((err) => console.log("error", err));
-  };
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+        .then((response) => {
+          this.props.setUser(response.data)
+          localStorage.setItem("user", response.data.Username)
+          alert(user.Username + " has been updated.");
+          console.log(response);
+        })
+        .catch(function (error) {
+          alert("Something went wrong...")
+          console.log(error.response.data);
+        });
+    }
+  }
 
   formValidation(username, password, email, birthdate) {
     let UsernameError = {};
