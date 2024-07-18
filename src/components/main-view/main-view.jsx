@@ -37,7 +37,7 @@ class MainView extends React.Component {
   }
 
   getUser(token, Username) {
-    axios.get(`https://linhflixdb.cyclic.app/users/${Username}`, {
+    axios.get(`https://linhflixdb.adaptable.app/users/${Username}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
@@ -49,7 +49,7 @@ class MainView extends React.Component {
   }
 
   getMovies(token) {
-    axios.get('https://linhflixdb.cyclic.app/movies', {
+    axios.get('https://linhflixdb.adaptable.app/movies', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
@@ -61,7 +61,7 @@ class MainView extends React.Component {
   }
 
   getGenres(token) {
-    axios.get('https://linhflixdb.cyclic.app/genres', {
+    axios.get('https://linhflixdb.adaptable.app/genres', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
@@ -75,7 +75,7 @@ class MainView extends React.Component {
   }
 
   getDirectors(token) {
-    axios.get('https://linhflixdb.cyclic.app/directors', {
+    axios.get('https://linhflixdb.adaptable.app/directors', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {

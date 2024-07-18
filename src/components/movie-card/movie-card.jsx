@@ -12,7 +12,7 @@ export class MovieCard extends React.Component {
   handleAdd() {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
-    axios.post(`https://linhflixdb.cyclic.app/users/${user}` + "/movies/" +
+    axios.post(`https://linhflixdb.adaptable.app/users/${user}` + "/movies/" +
       this.props.movie._id, {},
       { headers: { Authorization: `Bearer ${token}` } }
     )

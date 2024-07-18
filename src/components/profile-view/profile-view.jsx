@@ -22,7 +22,7 @@ export class ProfileView extends React.Component {
 
   removeFavorite(movie) {
     const token = localStorage.getItem("token");
-    const url = "https://linhflixdb.cyclic.app/users/" + localStorage.getItem("user") + "/movies/" + movie._id;
+    const url = "https://linhflixdb.adaptable.app/users/" + localStorage.getItem("user") + "/movies/" + movie._id;
     axios
       .delete(url, {
         headers: { Authorization: `Bearer ${token}` },
@@ -38,7 +38,7 @@ export class ProfileView extends React.Component {
     const user = localStorage.getItem("user");
     axios
       .delete(
-        `https://linhflixdb.cyclic.app/users/${user}`,
+        `https://linhflixdb.adaptable.app/users/${user}`,
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then(() => {
@@ -63,7 +63,7 @@ export class ProfileView extends React.Component {
     let token = localStorage.getItem("token");
     let setisValid = this.formValidation(username, password, email, birthdate);
     if (setisValid) {
-      axios.put(`https://linhflixdb.cyclic.app/users/${localStorage.getItem("user")}`,
+      axios.put(`https://linhflixdb.adaptable.app/users/${localStorage.getItem("user")}`,
         {
           Username: username || user.Username,
           Password: password || undefined,
