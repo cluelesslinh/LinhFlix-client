@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Modal from 'react-bootstrap/Modal';
 import { connect } from 'react-redux';
 import axios from "axios";
 import { Container, Card, FormControl, Button, Form, Col, Row } from "react-bootstrap";
@@ -17,21 +18,37 @@ export class ProfileView extends React.Component {
       EmailError: "",
       PasswordError: "",
       BirthdateError: "",
+      showModal: false,
+      modalMessage: ''
     };
   }
 
   removeFavorite(movie) {
     const token = localStorage.getItem("token");
-    const url = "https://linhflixdb.adaptable.app/users/" + localStorage.getItem("user") + "/movies/" + movie._id;
+    const url = `https://linhflixdb.adaptable.app/users/${localStorage.getItem("user")}/movies/${movie._id}`;
     axios
       .delete(url, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         this.props.setUser(response.data);
-        alert(movie.Title + " removed from your Favorites.");
+        this.setState({
+          modalMessage: `${movie.Title} removed from your Favorites.`,
+          showModal: true
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        this.setState({
+          modalMessage: 'An error occurred while removing the movie from your Favorites.',
+          showModal: true
+        });
       });
   }
+
+  handleCloseModal = () => {
+    this.setState({ showModal: false });
+  };
 
   handleDelete() {
     const token = localStorage.getItem("token");
@@ -125,7 +142,7 @@ export class ProfileView extends React.Component {
 
   render() {
     const { movies, user } = this.props;
-    const { UsernameError, EmailError, PasswordError, BirthdateError } = this.state;
+    const { UsernameError, EmailError, PasswordError, BirthdateError, showModal, modalMessage } = this.state;
     const FavoriteMovieList = movies.filter((movie) => {
       return user.FavoriteMovies.includes(movie._id);
     });
@@ -266,12 +283,23 @@ export class ProfileView extends React.Component {
             </Col>
           </Row>
         </Container>
+
+        <Modal show={showModal} onHide={this.handleCloseModal}>
+          <Modal.Header closeButton>
+          </Modal.Header>
+          <Modal.Body>{modalMessage}</Modal.Body>
+          <Modal.Footer>
+          </Modal.Footer>
+        </Modal>
+
       </div >
     );
   }
 }
 ProfileView.propTypes = {
-  movies: PropTypes.array.isRequired
+  movies: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
+  setUser: PropTypes.func.isRequired,
 };
 
 let mapStateToProps = state => {
